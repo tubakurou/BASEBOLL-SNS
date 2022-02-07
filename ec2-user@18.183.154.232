@@ -1,0 +1,4 @@
+DB_USERNAME="aaa"
+DB_PASSWORD="kawabata5"
+DB_HOST="rds-mysql-server.cwzhibrigbnt.ap-northeast-1.rds.amazonaws.com"
+DB_DATABASE="baseboll_sns
