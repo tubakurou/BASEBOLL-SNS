@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_id: 1
+  player_image_id: MyString
+  preyer_first_kana: MyString
+  preyer_last_kana: MyString
+  number: 1
+  dominant_pitch: 1
+  dominant_bat: 1
+  play_status: false
+  order_status: 1
+  position_status: 1
+  bat_status: false
+
+two:
+  team_id: 1
+  player_image_id: MyString
+  preyer_first_kana: MyString
+  preyer_last_kana: MyString
+  number: 1
+  dominant_pitch: 1
+  dominant_bat: 1
+  play_status: false
+  order_status: 1
+  position_status: 1
+  bat_status: false

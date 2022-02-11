@@ -67,3 +67,17 @@ group :production do
 end
 
 gem 'devise'
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
+gem 'bootstrap', '~> 4.5'
+gem 'jquery-rails'
+gem 'enum_help'
+gem 'kaminari','~> 1.2.1'
+group :development do
+  gem 'bullet'
+end
+group :development, :test do
+  gem 'rubocop', require: false
+end
+#gem 'foreigner'
+gem 'enum_help'

@@ -1,0 +1,2 @@
+class TeamInning < ApplicationRecord
+end

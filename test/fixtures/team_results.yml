@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_id: 1
+  geam_id: 1
+  reeor: 1
+  score: 1
+  hit: 1
+
+two:
+  team_id: 1
+  geam_id: 1
+  reeor: 1
+  score: 1
+  hit: 1

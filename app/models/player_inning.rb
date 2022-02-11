@@ -1,0 +1,2 @@
+class PlayerInning < ApplicationRecord
+end
