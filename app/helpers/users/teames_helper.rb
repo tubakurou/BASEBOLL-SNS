@@ -1,0 +1,2 @@
+module Users::TeamesHelper
+end

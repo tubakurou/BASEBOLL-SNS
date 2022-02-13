@@ -1,0 +1,64 @@
+<div class='container px-5 px-sm-0'>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>選手登録</h2>
+      <%= form_with model:@player, url: admins_players_path, method: :post, class: "form-horizontal" do |f| %>
+        <div class="col-xs-4 col-xs-offset-1">
+          <div class="img_field">
+            <%= attachment_image_tag @player, :player_image, :fill, 100, 100, format: 'jpeg' %>
+          </div>
+            <%= f.file_field :player_image, id: "user_img" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :first_name, "選手名（性）" %>
+          <%= f.text_field :first_name, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"選手名（名）" %>
+          <%= f.text_field :last_name, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"ふりがな（性）" %>
+          <%= f.text_field :first_name_kana, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"ふりがな（名）" %>
+          <%= f.text_field :last_name_kana, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"背番号" %>
+          <%= f.text_field :number, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"利き投げ" %>
+          <%= f.text_field :dominant_pitch, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+         <div class="form-group">
+          <%= f.label :"利き打ち" %>
+          <%= f.text_field :dominant_bat, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"チーム", class: "col-sm-3 control-label" %>
+          <%= f.collection_select(:team_id, Team.all, :id, :team_name, prompt: "-- 選択してください --", class: "col-sm-9 team_id") %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"守備位置" %>
+       <%= f.select :position_status,Player.position_statuses.keys.map {|k| [I18n.t("enums.player.position_status.#{k}"), k]} %>
+
+    
+        <div class="form-group">
+    	      <%= f.submit "新規登録", class: "btn btn-primary btn-lg pull-right" %>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>
