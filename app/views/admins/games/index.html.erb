@@ -1,0 +1,48 @@
+<div class= "container">
+  <div class= "row">
+    <div class="col-lg-8">
+      <h3>試合追加</h3>
+
+        <div class= "create-teams">
+          <%= form_with model:@game, url: {controller: "games", action: "create"} do |f| %>
+
+        <div class="form-group">
+          <%= f.label :試合日, class: "control-label" %>
+          <%= f.date_select :game_date, class: "form-control" %>
+
+        </div>
+          <%= f.label :試合時間, class: 'control-label' %>
+          <%= f.time_select :game_time, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :stadium, "開催球場" %>
+          <%= f.text_field :stadium %>
+        </div>
+        <div class="form-group">
+            <%= f.submit "新規登録" %>
+        <% end %>
+        </div>
+
+      <div class= "genre-list">
+        <table>
+          <thead>
+            <tr>試合</tr>
+        </thead>
+          <tbody>
+            <% @games.each do |game| %>
+              <tr>
+                <td><%= game.game_date %><%= game.game_time %><%= game.stadium %></td>
+                <td><%= link_to "編集する", edit_admins_team_path(game.id), class: "btn btn-primary" %></td>
+                <td><%= link_to "削除する", "/admins/games/#{game.id}", method: :delete, class: "btn btn-primary" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div><%= paginate @games %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

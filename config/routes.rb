@@ -1,33 +1,33 @@
 Rails.application.routes.draw do
- 
-  get 'games/index'
-  get 'games/show'
-  get 'games/edit'
-  get 'games/create'
-  scope module: :useres do
+
+get "/about" => 'homes#about'
+  root to: "homes#top"
+
+  scope module: :users do
+    resources :games do
+    resources :game_comments, only: [:create]
+    end
     resources :teams do
     resources :players
     end
   end
-  
+
   namespace :admins do
-    resources :teams, only: [:index, :edit] do
-    resources :players, only: [:index, :edit ,:create, :update, :destroy]
     resources :games
+    resources :teams do
+    resources :players, only: [:index, :edit, :create, :update, :destroy, :new]
+
+    resources :game_teams
     end
   end
-  
- get '/about' => 'homes#about'
-  root to: 'homes#top'
-  
-  
+
 devise_for :admins,skip: [:registrations,:passwords,], controllers: {
-  registrations: "admin/registrations",
-  sessions: 'admin/sessions'
+  registrations: "admins/registrations",
+  sessions: 'admins/sessions'
 }
 
-  devise_for :users,skip: [:passwords] ,controllers: {
+  devise_for :users,controllers: {
   registrations: "users/registrations",
-  sessions: 'users/sessions'
+  sessions: "users/sessions"
   }
 end

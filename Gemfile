@@ -81,3 +81,4 @@ group :development, :test do
 end
 #gem 'foreigner'
 gem 'enum_help'
+gem 'pry-rails'

@@ -1,7 +1,9 @@
 class Player < ApplicationRecord
   attachment :player_image
   belongs_to :team
-  has_many :player_resuit
+  has_many :game_prayers
+  has_many  :games, through: :game_players
+  
   enum position_status: {
     x: 0, "2B": 1, "SS": 2, "3B": 3, "1B": 4, "C": 5, "LF": 6, "CF": 7, "RF": 8, "DH": 9, "P": 10, "B": 11
   }, _prefix: true

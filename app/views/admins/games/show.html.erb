@@ -1,0 +1,48 @@
+
+      <table>
+        <thead>
+          <tr class="info">
+            <th>チーム</th>
+          </tr>
+        </thead>
+        <tbody>
+  				<% @teams.each do |team| %>
+    				<tr>
+    				  <td class="info col-xs-1">
+    				    <%= team.team_name %>
+                  <% if @game.already_game_teamed?(team) %>
+                  <%= button_to "チームを外す", admins_team_game_team_path(team.id,@game.id), method: :delete %>
+                  <% else %>
+                  <%= button_to "チームを加える", "/admins/teams/#{team.id}/game_teams?id=#{@game.id}", method: :post %>
+                  <% end %>
+             </td>
+              <td class="info col-xs-1">
+              </td>
+          <% end %>
+
+             <% @game_teams.each do |team| %>
+             <div class="form-group">
+             <td><%= team.team_name %></td>
+             </div>
+             <% team.players.each do |player| %>
+             <td><%= player.player_name %></td>
+             
+             <% end %>
+            <% end %>
+          <%= form_with model:@game, url: {controller: 'games', action: 'update'}, class: "form-horizontal", local: true do |f| %>
+
+             <div class="form-group">
+                <td><%= @game.game_show %></td>
+             </div>
+
+             <div class="form-group">
+                <td><%= f.text_field :game_show, class: "col-sm-9 form-control-static name" %></td>
+            </div>
+            <div class="form-group">
+                <td><%= f.submit "変更を保存", class: "btn btn-primary pull-right" %></td>
+             </div>
+
+          <% end %>
+          </tr>
+        </tbody>
+      </table>

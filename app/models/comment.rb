@@ -1,5 +1,4 @@
-class Comment < ApplicationRecord
+class Comment < ApplicationRecor
    belongs_to :user
-   belongs_to :game
-   has_many　:like
+  has_many :gamecomments, dependent: :destroy 
 end

@@ -1,16 +1,12 @@
 class Admins::PlayersController < ApplicationController
   def  index
-    
       # Categoryのデータベースのテーブルから一致するidを取得
       @team = Team.find(params[:team_id])
 
       # category_idと紐づく投稿を取得
-      @players = @team.player.order(created_at: :desc).all
+      @players = @team.players.order(created_at: :desc).all
   end
-
-
-
-
+  
   def show
   @player = Player.find(params[:id])
   @team = @player.team
@@ -25,7 +21,7 @@ class Admins::PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     if @player.save
-      redirect_to admins_players_path
+      redirect_to admins_team_players_path
     else
       render action: :new
     end
@@ -39,7 +35,7 @@ class Admins::PlayersController < ApplicationController
   def update
      @player = Prayer.find(params[:id])
     if @player.update(player_params)
-      redirect_to admin_player_path(@player)
+      redirect_to admins_player_path(@player)
     else
       render action: :edit
     end

@@ -6,8 +6,8 @@ class User < ApplicationRecord
          
   has_many :follower, class_name: "follower"
   has_many :followerd, class_name: "follower"
+  has_many :game_comments, dependent: :destroy
   belongs_to :team
-  
   attachment :user_image
   
 end

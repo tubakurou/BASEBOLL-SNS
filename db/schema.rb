@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_12_170008) do
+ActiveRecord::Schema.define(version: 2022_02_15_064144) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,26 +24,6 @@ ActiveRecord::Schema.define(version: 2022_02_12_170008) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "cards", force: :cascade do |t|
-    t.integer "team_id", null: false
-    t.integer "game_id", null: false
-    t.boolean "after_status", default: false, null: false
-    t.boolean "attack_status", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_cards_on_game_id"
-    t.index ["team_id"], name: "index_cards_on_team_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "game_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_comments_on_game_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
   create_table "followers", force: :cascade do |t|
     t.integer "follower_id", null: false
     t.integer "followerd_id", null: false
@@ -53,8 +33,43 @@ ActiveRecord::Schema.define(version: 2022_02_12_170008) do
     t.index ["followerd_id"], name: "index_followers_on_followerd_id"
   end
 
+  create_table "game_comments", force: :cascade do |t|
+    t.text "game_content"
+    t.integer "game_id", null: false
+    t.integer "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_game_comments_on_comment_id"
+    t.index ["game_id"], name: "index_game_comments_on_game_id"
+  end
+
+  create_table "game_players", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "game_id", null: false
+    t.integer "count", default: 0, null: false
+    t.integer "lost", default: 0, null: false
+    t.string "results"
+    t.integer "order_status", default: 0, null: false
+    t.integer "position_status", default: 0, null: false
+    t.integer "inning_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_players_on_game_id"
+    t.index ["player_id"], name: "index_game_players_on_player_id"
+  end
+
+  create_table "game_teams", force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "game_id", null: false
+    t.boolean "is_afters", default: false, null: false
+    t.boolean "isattacks", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_teams_on_game_id"
+    t.index ["team_id"], name: "index_game_teams_on_team_id"
+  end
+
   create_table "games", force: :cascade do |t|
-    t.date "game_day", null: false
     t.string "stadium"
     t.string "game_show"
     t.boolean "game_status", default: false, null: false
@@ -62,8 +77,11 @@ ActiveRecord::Schema.define(version: 2022_02_12_170008) do
     t.integer "boll", default: 0, null: false
     t.integer "out", default: 0, null: false
     t.string "result_show"
+    t.string "game_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "game_date"
+    t.time "game_time"
   end
 
   create_table "goods", force: :cascade do |t|
@@ -96,20 +114,6 @@ ActiveRecord::Schema.define(version: 2022_02_12_170008) do
     t.datetime "updated_at", null: false
     t.index ["inning_id"], name: "index_player_innings_on_inning_id"
     t.index ["player_result_id"], name: "index_player_innings_on_player_result_id"
-  end
-
-  create_table "player_results", force: :cascade do |t|
-    t.integer "game_id", null: false
-    t.integer "player_id", null: false
-    t.integer "conced", default: 0, null: false
-    t.integer "pitch_boll", default: 0, null: false
-    t.integer "result_info"
-    t.integer "order_status", default: 0, null: false
-    t.boolean "position_status", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_player_results_on_game_id"
-    t.index ["player_id"], name: "index_player_results_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
