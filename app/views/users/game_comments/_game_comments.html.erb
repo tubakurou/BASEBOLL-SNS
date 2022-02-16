@@ -1,0 +1,15 @@
+<table>
+  <thead>
+    <tr class="info">
+      <th>投稿一覧</th>
+    </tr>
+  </thead>
+    <tbody>
+    	<tr>
+    	   <% game_comments.each do |game_comment| %>
+          <td><%= game_comment.game_content %></td></tr>
+        <% end %>
+        </td>
+    </tbody>
+  </thead>
+<table>

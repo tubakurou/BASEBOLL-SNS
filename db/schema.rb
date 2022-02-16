@@ -36,11 +36,11 @@ ActiveRecord::Schema.define(version: 2022_02_15_064144) do
   create_table "game_comments", force: :cascade do |t|
     t.text "game_content"
     t.integer "game_id", null: false
-    t.integer "comment_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_game_comments_on_comment_id"
     t.index ["game_id"], name: "index_game_comments_on_game_id"
+    t.index ["user_id"], name: "index_game_comments_on_user_id"
   end
 
   create_table "game_players", force: :cascade do |t|

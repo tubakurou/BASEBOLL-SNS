@@ -1,0 +1,15 @@
+<table>
+        <tbody>
+    			<tr>
+    				<td class="info col-xs-1">
+              <%= form_with model:[game,game_comment] do |f| %>
+              <%= f.text_area :game_content %>
+            </td>
+            <td>
+              <%= f.submit "コメントする", class: "btn btn-primary pull-right" %>
+              <% end %>
+            </td>
+          </tr>
+      </tbody>
+ </thead>
+<table>

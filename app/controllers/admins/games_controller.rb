@@ -9,8 +9,8 @@ class Admins::GamesController < ApplicationController
     @teams = Team.all
     @game = Game.find(params[:id])
     @game_team = GameTeam.new
-    @game_teams = @game.teams
-    #@game_teams = Game.find(game_teams)
+    @game_team_teams = @game.teams
+    @game_teams = @game.game_teams
   end
 
   def create

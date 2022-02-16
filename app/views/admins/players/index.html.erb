@@ -30,10 +30,10 @@
                 <% end %>
               </td>
               <td class="text-right col-xs-1">
-                <%= player.dominant_pitch%><%= player.dominant_pitch %>
+                <%= player.dominant_pitch %><%= player.dominant_pitch %>
               </td>
               <td class="text-left col-xs-2">
-               <%= form_with model:player, url: admins_team_player_path(@team, player.id) do |f| %>
+              <%= form_with model:player,url:admins_team_player_path(@team, player.id),method: :patch, local:true do |f|%>
                   <div class="play_status">
                     <div>
                       <%= f.radio_button :play_status, true %>
@@ -44,8 +44,7 @@
                         <%= f.label :play_status, "欠場", value: false %>
                       </div>
                   　</div>
-                  　
-                  　 <td class="text-left col-xs-2">
+
                   <div class="is_batting">
                     <div>
                       <%= f.radio_button :is_batting, true %>
@@ -56,12 +55,12 @@
                         <%= f.label :is_batting, "ベンチ", value: false %>
                       </div>
                   　</div>
-                  　
+
                   <td class="text-left col-xs-2">
                     <div class="position_statusg">
                   　   <%= f.label :"守備位置" %>
                       <%=player.position_status %> <%= f.select :position_status,Player.position_statuses.keys.map {|k| [I18n.t("enums.player.position_status.#{k}"), k]} %>
-                  
+
                   <td class="text-left col-xs-2">
                     <div class="position_statusg">
                   　 <%= f.submit "変更を保存" %>

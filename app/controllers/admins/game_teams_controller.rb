@@ -7,9 +7,9 @@ class Admins::GameTeamsController < ApplicationController
    end
 
   def update
-    @game_team = GameTeam.find(id: params[:id])
-    if @game_team.update(game_team_params)
-      redirect_to admins_game_path(@game)
+   @game = Game.find_by(id: params[:id])
+    if @game_team = @game.game_teams.update(team_id: params[:team_id])
+       redirect_to admins_game_path(@game)
     else
       render action: :show
     end
