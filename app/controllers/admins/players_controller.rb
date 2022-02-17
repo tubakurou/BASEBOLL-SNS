@@ -6,7 +6,7 @@ class Admins::PlayersController < ApplicationController
       # category_idと紐づく投稿を取得
       @players = @team.players.order(created_at: :desc).all
   end
-  
+
   def show
   @player = Player.find(params[:id])
   @team = @player.team
@@ -33,9 +33,10 @@ class Admins::PlayersController < ApplicationController
   end
 
   def update
-     @player = Prayer.find(params[:id])
+     @player = Player.find(params[:id])
     if @player.update(player_params)
-      redirect_to admins_player_path(@player)
+
+     redirect_to admins_team_players_path
     else
       render action: :edit
     end

@@ -1,5 +1,5 @@
 class Admins::GamePlayersController < ApplicationControlle
-  
+
    def create
     @game = Game.find_by(id: params[:id])
     @game_player = @game.game_players.create(player_id: params[:player_id])

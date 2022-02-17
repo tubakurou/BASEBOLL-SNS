@@ -1,12 +1,2 @@
 index
-<h4>投稿する</h4>
 
-<%= form_with(model:[game, game_comment], method: :post) do |f| %>
-   <% = f.text_area:game_content, placeholder: '本文' %>
- <%= f.submit "投稿する", class: "btn btn-primary pull-right" %>
-
-
-<h>投稿一覧</h2>
-
-<%= @game_comments.each do |post| %>
- <%= @game.game_content %>

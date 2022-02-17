@@ -7,8 +7,16 @@
     <tbody>
     	<tr>
     	   <% game_comments.each do |game_comment| %>
-          <td><%= game_comment.game_content %></td></tr>
-        <% end %>
+          <td><%= game_comment.game_content %></td>
+
+           <td> <% if current_user&.like?(post) %>
+            <%= link_to like_path(current_user.likes.find_by(post: post)), method: :delete do %>
+       　  　　　　♡
+            <% else %>
+            <%= link_to likes_path(post: post), method: :post do %>
+             　　❤︎
+            <% end %>
+            </td></tr>
         </td>
     </tbody>
   </thead>

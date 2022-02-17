@@ -5,10 +5,11 @@ class Admins::GameTeamsController < ApplicationController
     @game_team = @game.game_teams.create(team_id: params[:team_id])
     redirect_to admins_game_path(@game)
    end
-
+    
   def update
    @game = Game.find_by(id: params[:id])
-    if @game_team = @game.game_teams.update(team_id: params[:team_id])
+   game_team = @game.game_teams.find_by(team_id: params[:team_id])
+    if game_team.update(game_team_params)
        redirect_to admins_game_path(@game)
     else
       render action: :show
@@ -30,6 +31,6 @@ class Admins::GameTeamsController < ApplicationController
     end
 
   def game_team_params
-    params.require(:game_team).permit(:is_affters, :is_attacks)
+    params.require(:game_team).permit(:is_afters, :is_attacks)
   end
 end
