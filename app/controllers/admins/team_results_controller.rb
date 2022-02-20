@@ -4,12 +4,9 @@ class Admins::TeamResultsController < ApplicationController
      @team = Team.find(params[:team_id])
      @team_results = @team.team_results.create(game_id: params[:game_id])
     redirect_to admins_game_path(params[:game_id])
-  end
+   end
 
-
-  end
-
- def update
+  def update
     @team_results = TeamResult.find(id: params[:id])
     if @team_results.update(team_results_params)
       redirect_to admins_game_path(@game)
@@ -18,8 +15,9 @@ class Admins::TeamResultsController < ApplicationController
     end
   end
 
- private
+private
   def team_results_params
     params.require(:game_player).permit(:error,:score,:hit)
   end
+end
 

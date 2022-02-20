@@ -56,7 +56,7 @@
                <%= @game.game_show %>
               </td>
             <td class="form-group">
-                <%= f.text_field :game_show, class: "col-sm-9 form-control-static name" %>
+              経過<%= f.text_field :game_show, class: "col-sm-9 form-control-static name" %>
             </td>
              <td>
                S <%= f.select :strike,Game.strikes.keys %>
@@ -77,3 +77,35 @@
          </tr>
       </tbody>
    </table>
+
+<% @game_players.each do |player| %>
+  <%= form_with model:player, url: admins_team_player_game_player_path(player_id: player.player.id,team_id: player.player.team.id), class: "form-horizontal", method: :patch, local: true do |f| %>
+    <td><% if player.player.play_status == true  %>
+        <%= player.player.first_name %><%= player.player.last_name %>：打席結果 <%= f.text_field :results %>
+        <% end %>
+    </td>
+    <td><% if player.player.play_status == true && player.player.position_status == "P" %>
+       <%= player.player.first_name %><%= player.player.last_name %>：球数 <%= f.number_field :boll_count %>
+        失点 <%= f.number_field :point_lost %>
+        <% end %>
+    <td>
+       <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
+   </td>
+  <% end %>
+  </td>
+<% end %>
+
+<table border="1">
+  <tr>
+    <th>日本語</th>
+    <th>英語</th>
+  </tr>
+  <tr>
+    <td>東京</td>
+    <td>Tokyo</td>
+  </tr>
+  <tr>
+    <td>大阪</td>
+    <td>Osaka</td>
+  </tr>
+</table>

@@ -12,19 +12,20 @@ class Admins::GamesController < ApplicationController
     @game_team = GameTeam.new
     @game_team_teams = @game.teams
     @team_results = TeamResult.new
+    @game_team_results = @game.team_results
     @game_teams = @game.game_teams
   end
 
   def game_players
-    @team = Team.fond(params[:team_id])
     @game = Game.find(params[:game_id])
-    @team = Team.fond(params[:team_id])
-    @game_players = @game.teams.game_players.includes(:player).order(created_at: :desc).all
+    @team = Team.find(params[:team_id])
+    @game_players = GamePlayer.where(game_id: @game.id,player_id: @team.players)
   end
-  
+
   def team_results
     @game = Game.find(params[:game_id])
-    @team_results = @game.team_results.includes(:team)
+    @team = Team.find(params[:team_id])
+    @team_results = TeamResult.where(game_id: @game.id,team_id: @team.id)
   end
 
   def create
