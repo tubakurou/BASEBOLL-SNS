@@ -9,20 +9,22 @@
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
 
-          <li><%= link_to '商品一覧',root_path, class: 'btn btn-outline-dark' %> </li>
-          <li><%= link_to 'カート',root_path, class: 'btn btn-outline-dark'%> </li>
-          <li><%= link_to 'マイページ',root_path, class: 'btn btn-outline-dark' %> </li
-          <li><%= link_to 'Exit', destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark'%> </li>
+          <li><%= link_to "マイページ",root_path, class: 'btn btn-outline-dark' %> </li>
+          <li><%= link_to "試合速報",root_path, class: 'btn btn-outline-dark'%> </li>
+          <li><%= link_to "コメント",root_path, class: 'btn btn-outline-dark' %> </li>
+          <li><%= link_to "ユーザー",root_path, class: 'btn btn-outline-dark' %> </li>
+          <li><%= link_to "チーム",root_path, class: 'btn btn-outline-dark' %> </li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark'%> </li>
           <% elsif admin_signed_in?%>
-          <li><%= link_to '商品一覧',root_path, class: 'btn btn-outline-dark'%></li>
-          <li><%= link_to '会員一覧',root_path, class: 'btn btn-outline-dark'%></li>
-          <li><%= link_to '注文履歴一覧',root_path, class: 'btn btn-outline-dark'%></li>
-          <li><%= link_to 'ジャンル一覧',root_path, class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to '試合編集',root_path, class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to 'ユーザー編集',root_path, class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to 'コメント編集',root_path, class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to 'チーム編集',root_path, class: 'btn btn-outline-dark'%></li>
           <li><%= link_to 'ログアウト',destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark'%></li>
           <% else %>
           <li><%= link_to 'About', about_path, class: 'btn btn-outline-dark'%>
-          <li><%= link_to '商品一覧', root_path, class: 'btn btn-outline-dark'%></li>
-          <li><%= link_to '新規登録',"users/sessions", class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to '試合速報', root_path, class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to '新規登録',"/sessions", class: 'btn btn-outline-dark'%></li>
           <li><%= link_to 'ログイン',new_user_session_path, class: 'btn btn-outline-dark'%></li>
           <% end %>
         </ul>

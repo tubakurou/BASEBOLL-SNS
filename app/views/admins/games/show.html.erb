@@ -11,54 +11,69 @@
     		  <td class="info col-xs-1">
     			<%= team.team_name %>
                 <% if @game.already_game_teamed?(team) %>
-                <%= button_to "チームを外す", admins_team_game_team_path(team.id,@game.id), method: :delete %>
+                <%= button_to "チームを外す",  admins_team_game_team_path(team.id,@game.id), method: :delete %>
                 <% else %>
                 <%= button_to "チームを加える", "/admins/teams/#{team.id}/game_teams?id=#{@game.id}", method: :post %>
                 <% end %>
           <% end %>
           </td>
-
            <td class="info col-xs-1">
             <% @game_team_teams.each do |team| %>
               <%= team.team_name %>
             </td>
+            <td class="info col-xs-1">
+              <%= link_to "チーム成績作成",admins_team_team_results_path(team.id,game_id: @game.id ), method: :post  %>
+            </td>
+            <td>
+              <%= link_to "選手成績一覧へ", admins_game_play_players_path(@game,team_id: team.id ) %>
+           </td>
+           <td>
+              <%= link_to "チーム試合成績一覧へ", admins_team_team_results_path(team,game_id: @game.id ) %>
+           </td>
           <% end %>
-          <td >
+          <td>
              <% @game_teams.each do |game_team| %>
                 <%= form_with model:game_team, url:admins_team_game_team_path(game_team.team_id),method: :patch, local:true do |f|%>
 
-			              <% if game_team.is_afters == true %>
-						        先攻
-					          <% elsif game_team.is_afters == false %>
-					          後攻
-					          <% end %>
+			       <% if game_team.is_afters == true %>
+					 先攻：
+				   <% elsif game_team.is_afters == false %>
+					 後攻：
+				   <% end %>
                   <%= f.radio_button :is_afters, true %>
                   <%= f.label :is_afters, "先攻", value: true %>
 
                   <%= f.radio_button :is_afters, false %>
                   <%= f.label :is_afters, "後攻", value: false %>
-        
 
                 <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %></td>
                 <% end %>
             <% end %>
            </td>
+          <%= form_with model:@game, url: {controller: 'games', action: 'update'}, class: "form-horizontal", method: :patch, local: true do |f| %>
 
-
-          <%= form_with model:@game, url: {controller: 'games', action: 'update'}, class: "form-horizontal", local: true do |f| %>
-
-             <div class="form-group">
-                <td><%= @game.game_show %></td>
-             </div>
-
-             <div class="form-group">
-                <td><%= f.text_field :game_show, class: "col-sm-9 form-control-static name" %></td>
-            </div>
-            <div class="form-group">
-                <td><%= f.submit "変更を保存", class: "btn btn-primary pull-right" %></td>
-             </div>
-
+             <td class="form-group">
+               <%= @game.game_show %>
+              </td>
+            <td class="form-group">
+                <%= f.text_field :game_show, class: "col-sm-9 form-control-static name" %>
+            </td>
+             <td>
+               S <%= f.select :strike,Game.strikes.keys %>
+            </td>
+            <td>
+               B <%= f.select :boll,Game.bolls.keys %>
+            </td>
+            <td>
+               O <%= f.select :out,Game.outs.keys %>
+            </td>
+            <td>
+                <%= f.select :game_status,Game.game_statuses.keys %>
+            </td>
+            <td class="form-group">
+                <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
           <% end %>
-          </tr>
-        </tbody>
-      </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>

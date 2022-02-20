@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_16_084654) do
+ActiveRecord::Schema.define(version: 2022_02_19_004011) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 2022_02_16_084654) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "followers", force: :cascade do |t|
@@ -46,12 +53,11 @@ ActiveRecord::Schema.define(version: 2022_02_16_084654) do
   create_table "game_players", force: :cascade do |t|
     t.integer "player_id", null: false
     t.integer "game_id", null: false
-    t.integer "count", default: 0, null: false
-    t.integer "lost", default: 0, null: false
-    t.string "results"
+    t.integer "boll_count", default: 0, null: false
+    t.integer "point_lost", default: 0, null: false
+    t.string "bat_results"
     t.integer "order_status", default: 0, null: false
     t.integer "position_status", default: 0, null: false
-    t.integer "inning_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_game_players_on_game_id"
@@ -72,7 +78,7 @@ ActiveRecord::Schema.define(version: 2022_02_16_084654) do
   create_table "games", force: :cascade do |t|
     t.string "stadium"
     t.string "game_show"
-    t.boolean "game_status", default: false, null: false
+    t.integer "game_status", default: 0, null: false
     t.integer "strike", default: 0, null: false
     t.integer "boll", default: 0, null: false
     t.integer "out", default: 0, null: false
@@ -98,16 +104,6 @@ ActiveRecord::Schema.define(version: 2022_02_16_084654) do
     t.string "inning_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "likes", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "game_comment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_comment_id"], name: "index_likes_on_game_comment_id"
-    t.index ["user_id", "game_comment_id"], name: "index_likes_on_user_id_and_game_comment_id", unique: true
-    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "player_innings", force: :cascade do |t|
@@ -155,6 +151,7 @@ ActiveRecord::Schema.define(version: 2022_02_16_084654) do
     t.integer "error", default: 0, null: false
     t.integer "score", default: 0, null: false
     t.integer "hit", default: 0, null: false
+    t.integer "inning", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_team_results_on_game_id"

@@ -1,2 +1,68 @@
-<h1>Admins::Players#edit</h1>
-<p>Find me in app/views/admins/players/edit.html.erb</p>
+	<h2 class="head-line title_h2 text-center">選手編集</h2>
+	<div class="info col-xs-1">
+	<%  @game.each do |game| %>
+	<h6><%= game.stadium %></h6>
+	</h6><%= game.game_date %></h6>
+  <%= link_to "出場",admins_team_player_game_players_path(@team.id,@player.id,game_id: game.id), method: :post  %>
+  <% end %>
+
+<%= form_with model:@player, url: admins_team_player_path, method: :patch, class: "form-horizontal", local: true do |f| %>
+        <div class="col-xs-4 col-xs-offset-1">
+          <div class="img_field">
+            <%= attachment_image_tag @player, :player_image, :fill, 100, 100, format: 'jpeg' %>
+          </div>
+            <%= f.file_field :player_image, id: "user_img" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :first_name, "選手名（性）" %>
+          <%= f.text_field :first_name, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"選手名（名）" %>
+          <%= f.text_field :last_name, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"ふりがな（性）" %>
+          <%= f.text_field :first_name_kana, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"ふりがな（名）" %>
+          <%= f.text_field :last_name_kana, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"背番号" %>
+          <%= f.text_field :number, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"利き投げ" %>
+          <%= f.text_field :dominant_pitch, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+         <div class="form-group">
+          <%= f.label :"利き打ち" %>
+          <%= f.text_field :dominant_bat, class: "col-sm-9 form-control-static name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"チーム", class: "col-sm-3 control-label" %>
+          <%= f.collection_select(:team_id, Team.all, :id, :team_name, prompt: "-- 選択してください --", class: "col-sm-9 team_id") %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :"守備位置" %>
+       <%= f.select :position_status,Player.position_statuses.keys %>
+
+
+        <div class="form-group">
+    	      <%= f.submit "新規登録", class: "btn btn-primary btn-lg pull-right" %>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>

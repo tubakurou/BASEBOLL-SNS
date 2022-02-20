@@ -5,7 +5,7 @@
 
       <div class= "create-teams">
         <%= form_with model:@team, url: {controller: "teams", action: "create"} do |f| %>
-          
+
         <div class="form-group">
             <%= f.label :name, "チーム名" %>
             <%= f.text_field :team_name %>
@@ -32,6 +32,7 @@
                 <td><%= attachment_image_tag teams, :team_image, format: 'jpeg', size: "100x100" %><%= teams.team_name %></td>
 
                 <td><%= link_to "編集する", edit_admins_team_path(teams.id), class: "btn btn-primary" %></td>
+                <div><%= link_to "削除する", admins_team_path(teams.id), method: :delete, class: "btn btn-primary" %></div>
               </tr>
             <% end %>
           </tbody>

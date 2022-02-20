@@ -6,7 +6,7 @@ class CreateTeamResults < ActiveRecord::Migration[5.2]
       t.integer :error, default: 0, null: false
       t.integer :score, default: 0, null: false #チーム得点
       t.integer :hit, default: 0, null: false
-
+      t.integer :inning, default: 0, null: false
       t.timestamps
     end
   end

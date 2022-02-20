@@ -1,10 +1,10 @@
-class Admins::GamePlayersController < ApplicationControlle
+class Admins::GamePlayersController < ApplicationController
 
-   def create
-    @game = Game.find_by(id: params[:id])
-    @game_player = @game.game_players.create(player_id: params[:player_id])
-    redirect_to admins_game_path(@game)
-   end
+  def create
+    @player = Player.find(params[:player_id])
+    @game_player = @player.game_players.create(game_id: params[:game_id])
+    redirect_to edit_admins_team_player_path(params[:team_id],params[:player_id])
+  end
 
   def update
     @game_player = Gameplayer.find(id: params[:id])
@@ -16,8 +16,8 @@ class Admins::GamePlayersController < ApplicationControlle
   end
 
  private
-  def game_team_params
-    params.require(:game_player).permit(:count, :lost, :results, :order_status, :position_status, :inning_status)
+  def game_player_params
+    params.require(:game_player).permit(:boll_count, :point_lost, :results, :order_status, :position_status)
   end
 end
 

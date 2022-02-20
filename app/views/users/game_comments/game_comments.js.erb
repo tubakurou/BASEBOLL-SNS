@@ -1,2 +1,2 @@
-$ ("#comments_area").html("<%= j(render 'users/game_comments/game_comments', game: @game, game_comment: @game_comment) %>");
+$ ("#comments_area").html("<%= j(render "users/game_comments/game_comments", game: @game, game_comments: @game_comments) %>");
 $ ("textarea").val('');

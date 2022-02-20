@@ -1,2 +1,5 @@
-index
-
+<% @game.each do |game| %>
+  <%= link_to game_path(game) do %>
+    <%= game.stadium %>
+  <% end %>
+<% end %>

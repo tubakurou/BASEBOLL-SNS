@@ -20,7 +20,12 @@ class Admins::TeamsController < ApplicationController
     @team.update(team_params)
     redirect_to admins_teams_path
   end
-
+  
+   def destroy
+    @team= Team.find(params[:id])
+    @team.destroy
+    redirect_to admins_teams_path
+   end
 end
 
 private

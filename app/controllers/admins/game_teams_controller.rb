@@ -5,7 +5,7 @@ class Admins::GameTeamsController < ApplicationController
     @game_team = @game.game_teams.create(team_id: params[:team_id])
     redirect_to admins_game_path(@game)
    end
-    
+
   def update
    @game = Game.find_by(id: params[:id])
    game_team = @game.game_teams.find_by(team_id: params[:team_id])

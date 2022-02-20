@@ -2,13 +2,14 @@
   <div class= "row">
     <div class="col-lg-8">
       <h3>チーム編集</h3>
-       <%= form_with model:@team, url: {controller: 'teams', action: 'update'} do |f| %>
+       <%= form_with model:@team, url: {controller: 'teams', action: 'update'},local: true do |f| %>
           <div class="col-xs-offset-1">
             <%= f.label :team_name, "チーム名" %>
             <%= f.text_field :team_name %>
              <%= attachment_image_tag @team, :team_image, :fill, 100, 100, format: 'jpeg' %>
             <%= f.file_field :team_image %>
             <%= f.submit "変更を保存" %>
+    
           </div>
           <% end %>
 

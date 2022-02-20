@@ -4,20 +4,22 @@
       <th>投稿一覧</th>
     </tr>
   </thead>
-    <tbody>
-    	<tr>
+  <tbody>
+     <tr>
+    	 <td>
     	   <% game_comments.each do |game_comment| %>
-          <td><%= game_comment.game_content %></td>
-
-           <td> <% if current_user&.like?(post) %>
-            <%= link_to like_path(current_user.likes.find_by(post: post)), method: :delete do %>
-       　  　　　　♡
-            <% else %>
-            <%= link_to likes_path(post: post), method: :post do %>
-             　　❤︎
+    	     <%= game_comment.game_content %>:<%= game_comment.user.first_name %>
+           <%= game_comment.created_at.strftime('%Y/%m/%d') %>
+           <div id="favorites_buttons_<%= @game.id %>_<%= game_comment.id %>">
+             <%= render "users/favorites/favorites", game: @game, game_comment: game_comment %>
+           </div>
+           <% if game_comment.user == current_user %>
+             <%= form_with model:[game,game_comment],method: :delete do |f| %>
+               <%= f.submit "削除", class: "btn btn-primary pull-right" %>
+        　    <% end %>
             <% end %>
-            </td></tr>
-        </td>
-    </tbody>
-  </thead>
-<table>
+          <% end %>
+       </td>
+    </tr>
+  </tbody>
+</table>

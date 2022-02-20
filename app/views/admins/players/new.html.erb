@@ -52,7 +52,7 @@
 
         <div class="form-group">
           <%= f.label :"守備位置" %>
-       <%= f.select :position_status,Player.position_statuses.keys.map {|k| [I18n.t("enums.player.position_status.#{k}"), k]} %>
+       <%= f.select :position_status,Player.position_statuses.keys %>
 
 
         <div class="form-group">
