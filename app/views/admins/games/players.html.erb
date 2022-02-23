@@ -1,0 +1,52 @@
+<p><%= @game.stadium %>,<%=@game.game_date %>,<%=@game.game_time %></p>
+<% @game_teams.each do |team| %>
+  <% team.players.each do |player| %>
+    <%= player.first_name %>
+    <%= form_with model:player, url:admins_team_player_path(team, player.id),method: :patch, local:true do |f|%>
+      <td class="text-left col-xs-2">
+        <%=player.play_status %>：<%= f.radio_button :play_status, true %>
+        <%= f.label :play_status, "出場中", value: true %>
+        <%= f.radio_button :play_status, false %>
+        <%= f.label :play_status, "出場済み", value: false %>
+      </td>
+      <td>
+        <% if player.is_batting == true %>
+          <span class="text-danger">打席中：</span>
+        <% else %>
+          <span class ="text-primary">打席前：</span>
+        <% end %>
+        <%= f.radio_button :is_batting, true %>
+        <%= f.label :is_batting, "打席中", value: true %>
+        <%= f.radio_button :is_batting, false %>
+        <%= f.label :is_batting, "打席前", value: false %>
+      </td>
+      <td class="text-left col-xs-2">
+          <%= f.label :"守備位置" %>
+          <%=player.position_status %> <%= f.select :position_status,Player.position_statuses.keys %>
+      </td>
+      <td class="text-left col-xs-2">
+          <%= f.label :"走塁位置" %>
+          <%=player.run_status %> <%= f.select :run_status,Player.run_statuses.keys %>
+      </td>
+       <td class="text-left col-xs-2">
+          <%= f.label :"スタメン" %>
+          <%=player.inning %> <%= f.select :order_status,Player.order_statuses.keys  %>
+      </td>
+      <td>
+        <%= f.submit "変更を保存" %>
+      </td>
+    <% end %>
+     <%= form_with model:team.game_teams,url:admins_team_player_game_players_path(team, player.id,game_id: @game.id), local:true do |f|%>
+       <td>
+       イニング<%= f.number_field :inning %>
+       </td>
+       <td>
+      　記録用スタメン順位<%= f.select :order_status,GamePlayer.order_statuses.keys %>
+       </td>
+       <td>
+      　記録用守備位置<%= f.select :position_status,GamePlayer.position_statuses.keys %>
+       </td>
+      <%= f.submit "新規出場登録" %>
+    <% end %>
+  <% end %>
+<% end %>

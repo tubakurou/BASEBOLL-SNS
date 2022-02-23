@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_19_004011) do
+ActiveRecord::Schema.define(version: 2022_02_22_081655) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2022_02_19_004011) do
     t.integer "position_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inning", default: 0, null: false
     t.index ["game_id"], name: "index_game_players_on_game_id"
     t.index ["player_id"], name: "index_game_players_on_player_id"
   end
@@ -68,7 +69,7 @@ ActiveRecord::Schema.define(version: 2022_02_19_004011) do
     t.integer "team_id", null: false
     t.integer "game_id", null: false
     t.boolean "is_afters", default: false, null: false
-    t.boolean "isattacks", default: false, null: false
+    t.boolean "is_attacks", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_game_teams_on_game_id"
@@ -88,6 +89,7 @@ ActiveRecord::Schema.define(version: 2022_02_19_004011) do
     t.datetime "updated_at", null: false
     t.date "game_date"
     t.time "game_time"
+    t.integer "innings", default: 0, null: false
   end
 
   create_table "goods", force: :cascade do |t|
@@ -134,6 +136,13 @@ ActiveRecord::Schema.define(version: 2022_02_19_004011) do
     t.boolean "is_batting", default: false, null: false
     t.integer "inning"
     t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_innings", force: :cascade do |t|
