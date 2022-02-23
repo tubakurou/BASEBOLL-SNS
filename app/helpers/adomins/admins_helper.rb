@@ -1,0 +1,2 @@
+module Adomins::AdminsHelper
+end

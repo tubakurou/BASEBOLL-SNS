@@ -1,0 +1,14 @@
+<div>
+<h3>S<%= @game.strike %></h3> 
+
+<h3>B <%= @game.boll %></h3>
+
+<h3>O <%= @game.out %></h3> 
+</div>
+<div id="comments_area">
+  <%= render 'users/game_comments/game_comments', game: @game, game_comments: @game_comments %>
+</div>
+
+ <div class="new-game_comment">
+  <%= render 'users/game_comments/form', game: @game, game_comment: @game_comment %>
+</div>

@@ -1,0 +1,74 @@
+<div class='container px-5 px-sm-0'>
+  <h2><%= @team.team_name %>所属選手一覧</h2>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <table>
+        <thead>
+          <tr class="info">
+            <th>イメージ</th>
+            <th>背番号</th>
+            <th>選手名</th>
+            <th>利き腕</th>
+            <th>出場</th>
+            <th>打席</th>
+            <th>守備</th>
+            <th>走塁</th>
+          </tr>
+        </thead>
+        <tbody>
+  				<% @players.each do |player| %>
+    				<tr>
+    				  <td class="info col-xs-1">
+    				    <%= attachment_image_tag player, :player_image, format: 'jpeg', size: "100x100" %></td>
+              <td class="info col-xs-1">
+                <%= player.number %>
+              </td>
+              <td class="text-left">
+                <%= link_to edit_admins_team_player_path(@team, player.id), class: "btn-link" do %>
+                  <%= player.first_name %><%= player.last_name %>
+                <% end %>
+              </td>
+              <td class="text-right col-xs-1">
+                <%= player.dominant_pitch %><%= player.dominant_pitch %>
+              </td>
+              <td class="text-left col-xs-2">
+              <%= form_with model:player,url:admins_team_player_path(@team, player.id),method: :patch, local:true do |f|%>
+                 <td class="text-left col-xs-2">
+                    <%= f.radio_button :play_status, true %>
+                    <%= f.label :play_status, "出場中", value: true %>
+
+                    <%= f.radio_button :play_status, false %>
+                    <%= f.label :play_status, "欠場", value: false %>
+                 </td>
+
+                  <td class="is_batting">
+                    <%= f.radio_button :is_batting, true %>
+                    <%= f.label :is_batting, "打席中", value: true %>
+
+                    <%= f.radio_button :is_batting, false %>
+                    <%= f.label :is_batting, "打席前", value: false %>
+                  </td>
+
+                  <td class="text-left col-xs-2">
+                  　   <%= f.label :"守備位置" %>
+                      <%=player.position_status %> <%= f.select :position_status,Player.position_statuses.keys %>
+                  </td>
+                  <td class="text-left col-xs-2">
+                  　   <%= f.label :"走塁位置" %>
+                      <%=player.run_status %> <%= f.select :run_status,Player.run_statuses.keys %>
+                  </td>
+
+                  <td class="text-left col-xs-2">
+                  　 <%= f.submit "変更を保存" %>
+                  </td>
+                   <td class="text-left col-xs-2">
+                   <%= link_to "編集", edit_admins_team_player_path(player.id,@team.id), class: "btn btn-primary pull-right" %>
+                  </td>
+              <% end %>
+              <% end %>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

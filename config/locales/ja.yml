@@ -1,0 +1,16 @@
+ja:
+  enums:
+    prayer:
+      position_status:
+        unregistered: "未"
+        second: "二"
+        short: "遊"
+        third: "三"
+        first: "一"
+        catcher: "補"
+        left: "左"
+        center: "中"
+        light: "右"
+        dh: "指"
+        pitcher: "投"
+        instead: "代"

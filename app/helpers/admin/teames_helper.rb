@@ -1,0 +1,2 @@
+module Admin::TeamesHelper
+end

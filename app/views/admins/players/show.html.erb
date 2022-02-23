@@ -1,0 +1,66 @@
+<div class='container px-5 px-sm-0'>
+	<h2 class="head-line title_h2 text-center">選手詳細</h2>
+	<div class="row">
+		<div class="col-xs-12">
+		  <div class="col-xs-4">
+		      <div id="img_field">
+		          <%= attachment_image_tag(@player, :player_image, size: "300x220") %>
+		      </div>
+	      </div>
+	      <div class="col-xs-6">
+	         <div class="field">
+	           <div class="field">
+						<p>チーム  <%= @player.team.team_name %></p><br>
+		      </div>
+						<p>かな  <%= @player.first_name_kana %><%= @player.last_name_kana %></p>
+		      </div><br>
+		      
+		      <div class="field">
+						<p>選手名  <%= @player.first_name_kana %><%= @player.last_name_kana %></p>
+		      </div><br>
+		      <div class="field">
+						<p>背番号  <%= @player.number %></p><br>
+		      </div>
+		       <div class="field">
+						<p>利き投げ  <%= @player.dominant_pitch %></p><br>
+		      </div>
+		       <div class="field">
+						<p>利き打ち  <%= @player.dominant_bat %></p><br>
+		      </div>
+		      <div class="field">
+						<p>走塁ステータス  <%= @player.run_status %></p><br>
+		      </div>
+		      <div class="field">
+						<p>スタメンステータス  <%= @player.order_status %></p><br>
+		      </div>
+		      <div class="field">
+						<p>守備ステータス  <%= @player.position_status %></p><br>
+		      </div>
+		      
+		      <div class="field">
+					<p>
+							出場ステータス
+			        <% if @player.play_status == true %>
+						<i class="fas fa-bullseye red">出場中</i>出場中
+					<% elsif @player.play_status == false %>ベンチ入り
+						<i class="fas fa-bullseye blue">ベンチ入り</i>
+					<% end %>
+					</p>
+		      </div>
+		      
+		       <div class="field">
+					<p>
+							打席ステータス
+			        <% if @player.is_batting == true %>
+						<i class="fas fa-bullseye red"></i>出場中
+					<% elsif @player.is_batting == false %>ベンチ入り
+						<i class="fas fa-bullseye blue"></i>
+					<% end %>
+					</p>
+		      </div>
+		      
+			 
+	      	</div>
+	    </div>
+	</div>
+</div>

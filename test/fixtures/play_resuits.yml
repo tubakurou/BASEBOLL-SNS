@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  strike: 1
+  boll: 1
+  out: 1
+  conceded: 1
+  pitch_boll: 1
+  result_info: 
+  position_status: false
+  order_status: 1
+
+two:
+  strike: 1
+  boll: 1
+  out: 1
+  conceded: 1
+  pitch_boll: 1
+  result_info: 
+  position_status: false
+  order_status: 1
