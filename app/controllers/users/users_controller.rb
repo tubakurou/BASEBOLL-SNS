@@ -28,9 +28,10 @@ def update
    end
 end
 
+
 private
   def user_params
     params.require(:user).permit(:team_id, :last_name, :first_name, :last_name_kana, :first_name_kana, :profile, :user_image_id, :is_deleted)
   end
-end  
-  
+end
+

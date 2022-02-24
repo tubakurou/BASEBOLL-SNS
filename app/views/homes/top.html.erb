@@ -1,2 +1,22 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<h1>本日の試合</h1>
+<% @games.each do |game| %>
+  <% if  game.game_status == "試合前" %>
+    <h4><%= @results[game.id][:ahead_team_name] %></h4> VS
+    <h4><%= @results[game.id][:after_team_name] %></h4>
+    <p><%= game.stadium %></p>
+    <p><%= game.game_date %>　<%= game.game_time.strftime("%H:%M") %>開始予定</p>
+  <%else if  game.game_status == "試合中" && @results[game.id][:ahead_is_attacks] == true %>
+    <h4><%= @results[game.id][:ahead_team_name] %> <%= @results[game.id][:ahead_score] %></h4> VS
+    <h4><%= @results[game.id][:after_team_name] %> <%= @results[game.id][:after_score] %></h4>
+    <p><%= game.stadium %></p>
+    <p><%= game.innings %>回裏</p>
+  <%else if  game.game_status == "試合中" && @results[game.id][:ahead_is_attacks] == false %>
+    <h4><%= @results[game.id][:ahead_team_name] %> <%= @results[game.id][:ahead_score] %></h4> VS
+    <h4><%= @results[game.id][:after_team_name] %> <%= @results[game.id][:after_score] %></h4>
+    <p><%= game.stadium %></p>
+    <p><%= game.innings %>回表</p>
+  <% end %>
+  <% end %>
+  <% end %>
+<% end %>
+

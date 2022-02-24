@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
    attachment :player_image
-  
+
    has_many  :game_teams
    has_many  :teams, through: :game_teams
    has_many  :game_players
@@ -21,8 +21,9 @@ class Game < ApplicationRecord
    enum out: {
     "0": 0, "1": 1, "2": 2, "3": 3
   },_prefix: true
-
+  
    def already_game_teamed?(team)
     self.game_teams.exists?(team_id: team.id)
    end
+
 end

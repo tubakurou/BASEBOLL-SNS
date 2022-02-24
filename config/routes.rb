@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users,controllers: {
   registrations: "users/registrations",
   sessions: "users/sessions"
@@ -9,14 +9,13 @@ devise_for :admins,skip: [:passwords,], controllers: {
   registrations: "admins/registrations",
   sessions: 'admins/sessions'
 }
-
 get "/about" => 'homes#about'
   root to: "homes#top"
 
-
   scope module: :users do
     resources :users do
-      resource :relationships, only: [:create, :destroy]
+      get 'search' => 'game_comments#search'
+    resource :relationships, only: [:create, :destroy]
       get 'followings' => "relationships#followings", as: "followings"
       get 'followers' => "relationships#followers", as: "followers"
     end
@@ -29,9 +28,10 @@ get "/about" => 'homes#about'
     resources :players
     end
   end
-
+ 
   namespace :admins do
     resources :games do
+      get 'search' => 'game_comments#search'
       get ":team_id/game_players" => "games#game_players", as: "play_players"
       get ":team_id/team_results" => "games#team_results", as: "team_results"
        get ":team_id/players" => "games#players", as: "game_players"
@@ -47,5 +47,4 @@ get "/about" => 'homes#about'
       resources :team_results
     end
   end
-
 end
