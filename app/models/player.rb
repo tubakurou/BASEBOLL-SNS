@@ -1,6 +1,6 @@
 class Player < ApplicationRecord
   attachment :player_image
-  belongs_to :team
+  belongs_to :team, optional: true
   has_many :game_players
   has_many  :games, through: :game_players
 

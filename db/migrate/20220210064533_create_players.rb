@@ -9,7 +9,7 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.string :first_name_kana, null: false
       t.string :number, null: false
       t.string :dominant_pitch, null: false #利き投げ
-      t.string :dominant_bat, null: false #効き打ち
+      t.string :dominant_bat, null: false #利き打ち
       t.boolean :play_status, default: false, null: false #スタメン順位または控え
       t.integer :order_status, default: 0, null: false #試合登録の有無
       t.integer :position_status, default: 0, null: false
