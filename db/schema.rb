@@ -98,15 +98,6 @@ ActiveRecord::Schema.define(version: 2302_02_10_013959) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "player_innings", force: :cascade do |t|
-    t.integer "inning_id", null: false
-    t.integer "player_result_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["inning_id"], name: "index_player_innings_on_inning_id"
-    t.index ["player_result_id"], name: "index_player_innings_on_player_result_id"
-  end
-
   create_table "players", force: :cascade do |t|
     t.integer "team_id", null: false
     t.string "player_image_id"
