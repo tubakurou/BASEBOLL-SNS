@@ -605,6 +605,7 @@
       <div class="new-game_comment">
         <%= render 'users/game_comments/form', game: @game, game_comment: @game_comment %>
       </div>
+      <%= link_to "試合コメント一覧へ", game_game_comment_favorites_path(@gam) %>
 </div>
 </div>
  <% @game_teams.each do |team| %>
