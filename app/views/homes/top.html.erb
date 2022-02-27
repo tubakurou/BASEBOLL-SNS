@@ -1,22 +1,53 @@
 <h1>本日の試合</h1>
 <% @games.each do |game| %>
-  <% if  game.game_status == "試合前" %>
-    <h4><%= @results[game.id][:ahead_team_name] %></h4> VS
-    <h4><%= @results[game.id][:after_team_name] %></h4>
-    <p><%= game.stadium %></p>
-    <p><%= game.game_date %>　<%= game.game_time.strftime("%H:%M") %>開始予定</p>
-  <%else if  game.game_status == "試合中" && @results[game.id][:ahead_is_attacks] == true %>
-    <h4><%= @results[game.id][:ahead_team_name] %> <%= @results[game.id][:ahead_score] %></h4> VS
-    <h4><%= @results[game.id][:after_team_name] %> <%= @results[game.id][:after_score] %></h4>
-    <p><%= game.stadium %></p>
-    <p><%= game.innings %>回裏</p>
-  <%else if  game.game_status == "試合中" && @results[game.id][:ahead_is_attacks] == false %>
-    <h4><%= @results[game.id][:ahead_team_name] %> <%= @results[game.id][:ahead_score] %></h4> VS
-    <h4><%= @results[game.id][:after_team_name] %> <%= @results[game.id][:after_score] %></h4>
-    <p><%= game.stadium %></p>
-    <p><%= game.innings %>回表</p>
-  <% end %>
-  <% end %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <%= link_to game_path(game), class: "btn-link" do %>
+      <% if game.game_status == "試合前" %>
+        <%= attachment_image_tag @results[game.id][:ahead_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4>
+        <%= @results[game.id][:ahead_team_name] %>　VS
+        <%= attachment_image_tag @results[game.id][:after_team], :team_image, format: 'jpg', size: "100x100" %>
+        <%= @results[game.id][:after_team_name] %>
+        </h4>
+        <p><%= game.stadium %></p>
+        <p><%= game.game_time.strftime("%H:%M") %>開始予定</p>
+      <%else if  game.game_status == "試合中" && @results[game.id][:ahead_is_attacks] == true %>
+        <%= attachment_image_tag @results[game.id][:ahead_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:ahead_team_name] %> <%= @results[game.id][:ahead_score] %></h4> VS
+        <%= attachment_image_tag @results[game.id][:after_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:after_team_name] %> <%= @results[game.id][:after_score] %></h4>
+        <p><%= game.stadium %></p>
+        <p><%= game.innings %>回裏</p>
+      <%else if  game.game_status == "試合中" && @results[game.id][:ahead_is_attacks] == false %>
+        <%= attachment_image_tag @results[game.id][:ahead_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:ahead_team_name] %> <%= @results[game.id][:ahead_score] %></h4> VS
+        <%= attachment_image_tag @results[game.id][:after_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:after_team_name] %> <%= @results[game.id][:after_score] %></h4>
+        <p><%= game.stadium %></p>
+        <p><%= game.innings %>回表</p>
+      <%else if  game.game_status == "試合終了" %>
+      <%= attachment_image_tag @results[game.id][:ahead_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:ahead_team_name] %> <%= @results[game.id][:ahead_score] %></h4> VS
+        <%= attachment_image_tag @results[game.id][:after_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:after_team_name] %> <%= @results[game.id][:after_score] %></h4>
+        <p><%= game.stadium %></p>
+        <p>試合終了</p>
+      <%else if  game.game_status == "試合中止" %>
+        <%= attachment_image_tag @results[game.id][:ahead_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:ahead_team_name] %></h4> VS
+        <%= attachment_image_tag @results[game.id][:after_team], :team_image, format: 'jpg', size: "100x100" %>
+        <h4><%= @results[game.id][:after_team_name] %></h4>
+        <p><%= game.stadium %></p>
+        <p>試合中止</p>
+      </div>
+    </div>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
+      <% end %>
 <% end %>
+
 

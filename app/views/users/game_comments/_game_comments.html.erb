@@ -1,12 +1,8 @@
-<div class="search-form">
-  <%= form_with url: user_search_path(@game), method: :get, local: true do |f| %>
-    <%= f.text_field :word, value: @word %>
-    <%= f.submit "検索" %>
-  <% end %>
-</div>
+
+
 <table>
   <thead>
-    <tr class="info">
+    <tr>
       <th>投稿一覧</th>
     </tr>
   </thead>
@@ -14,10 +10,10 @@
      <tr>
     	 <td>
     	   <% game_comments.each do |game_comment| %>
-    	     <%= game_comment.game_content %>:<%= game_comment.user.first_name %>
+    	     <%= game_comment.game_content %>:<%= game_comment.user.nick_name %>
            <%= game_comment.created_at.strftime('%Y/%m/%d') %>
            <div id="favorites_buttons_<%= @game.id %>_<%= game_comment.id %>">
-             <%= render "users/favorites/favorites", game: @game, game_comment: game_comment %>
+             <%= render "users/favorites/favorites", game: game, game_comment: game_comment %>
            </div>
            <% if game_comment.user == current_user %>
              <%= form_with model:[game,game_comment],method: :delete do |f| %>

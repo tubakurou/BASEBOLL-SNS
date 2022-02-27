@@ -14,28 +14,24 @@
         </thead>
         <tbody>
   				<% @team_results.each do |team_results| %>
-      				<%= form_with model:team_results, url: admins_team_team_result_path(team_results.team_id, team_results.id), class: "form-horizontal", method: :patch, local: true do |f| %>
         				<tr>
         				  <td class="info col-xs-1">
         				    <%= team_results.inning %>
-        				    <%= f.number_field:inning %>
         				  </td>
         				  <td class="info col-xs-1">
         				    <%= team_results.hit %>
-        				     <%= f.number_field:hit %>
+        				     
         				  </td>
                   <td class="info col-xs-1">
                     <%= team_results.score %>
-                     <%= f.number_field:score %>
+                     
                   </td>
                     <td class="info col-xs-1">
         				    <%= team_results.error %>
-        				     <%= f.number_field:error %>
+        		
         				  </td>
-        				  <%= f.submit "変更を保存" %>
-        				  <%= link_to "記録削除", admins_team_team_result_path(team_results.team_id,team_results),method: :delete %>
         				</tr>
-              <% end %>
+             
           <% end %>
          </tbody>
       </table>

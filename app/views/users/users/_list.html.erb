@@ -1,0 +1,21 @@
+<table class='table'>
+  <tr><%= attachment_image_tag(user, :user_image, :fill, 100, 100, fallback: "no_image_user.png") %></tr>
+  <tr>
+	  <th>name</th>
+	  <th><%= user.nick_name %></th>
+  </tr>
+  <tr>
+	  <th>プロフィール</th>
+	  <th><%= user.profile%></th>
+  </tr>
+  <tr>
+     <th>follows: <%= user.followings.count %></th>
+     </tr>
+     <tr>
+     <th>followers: <%= user.followers.count %></th>
+  </tr>
+</table>
+
+<div class='row'>
+  <%= link_to '編集へ',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+</div>

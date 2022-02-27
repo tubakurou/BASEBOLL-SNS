@@ -1,4 +1,5 @@
 class Admins::TeamsController < ApplicationController
+  before_action user_admin, only: [:index]
   def index
     @team = Team.new
     @teams = Team.all
@@ -26,9 +27,13 @@ class Admins::TeamsController < ApplicationController
     @team.destroy
     redirect_to admins_teams_path
    end
-end
+
 
 private
   def team_params
       params.require(:team).permit(:team_name,:team_image)
   end
+  def if_not_admin
+    redirect_to root_path unless current_.admin?
+  end
+end

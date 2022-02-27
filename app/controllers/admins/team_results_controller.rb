@@ -21,9 +21,20 @@ class Admins::TeamResultsController < ApplicationController
     end
   end
 
+    def destroy
+    @team_results = TeamResult.find(params[:id])
+     @game.find_by(params[:id])
+    @team_results.destroy
+  redirect_to request.referer
+  end
+
+
 private
   def team_results_params
     params.require(:team_result).permit(:error,:score,:hit, :inning)
+  end
+  def if_not_admin
+    redirect_to root_path unless current_.admin?
   end
 end
 

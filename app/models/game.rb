@@ -10,18 +10,18 @@ class Game < ApplicationRecord
    has_many  :teames
 
    enum game_status: {
-    "試合前": 0, "試合中": 1, "試合後": 2
+    "試合前": 0, "試合中": 1, "試合終了": 2, "試合中止": 3
   }
   enum boll: {
-    "0": 0, "1": 1, "2": 2, "3": 3, "4": 4
+    "-": 0, "●": 1, "●●": 2, "●●●": 3, "●●●●": 4
   },_prefix: true
    enum strike: {
-    "0": 0, "1": 1, "2": 2, "3": 3
+    "-": 0, "●": 1, "●●": 2, "●●●": 3
   },_prefix: true
    enum out: {
-    "0": 0, "1": 1, "2": 2, "3": 3
+    "-": 0, "●": 1, "●●": 2, "●●●": 3
   },_prefix: true
-  
+
    def already_game_teamed?(team)
     self.game_teams.exists?(team_id: team.id)
    end

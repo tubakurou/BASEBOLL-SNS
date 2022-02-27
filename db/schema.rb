@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_075533) do
+ActiveRecord::Schema.define(version: 2022_02_27_091339) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_075533) do
     t.integer "run_status", default: 0, null: false
     t.boolean "is_batting", default: false, null: false
     t.integer "inning"
+    t.boolean "is_pitch", default: false, null: false
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
@@ -192,6 +193,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_075533) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nick_name"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["team_id"], name: "index_users_on_team_id"

@@ -14,12 +14,16 @@ get "/about" => 'homes#about'
 
   scope module: :users do
     resources :users do
-      get 'search' => 'game_comments#search'
+      get   "/users/:id/quit" => "users#quit", as: "quit"
+      patch "users/:id/out" => "users#out", as: "out"
     resource :relationships, only: [:create, :destroy]
       get 'followings' => "relationships#followings", as: "followings"
       get 'followers' => "relationships#followers", as: "followers"
     end
     resources :games do
+      get ":team_id/game_players" => "games#game_players", as: "/play_players"
+      get ":team_id/team_results" => "games#team_results", as: "team_results"
+      get 'game_comments' => "games#game_comments", as: "game_comments"
       resources :game_comments do
         resource :favorites, only: [:create, :destroy]
       end
@@ -28,10 +32,10 @@ get "/about" => 'homes#about'
     resources :players
     end
   end
- 
+
   namespace :admins do
+    resources :users
     resources :games do
-      get 'search' => 'game_comments#search'
       get ":team_id/game_players" => "games#game_players", as: "play_players"
       get ":team_id/team_results" => "games#team_results", as: "team_results"
        get ":team_id/players" => "games#players", as: "game_players"

@@ -1,4 +1,5 @@
 <div class="font-weight-bold">
+  <%= flash[:notice] %>
     新規会員登録
   </div>
 </h5>
@@ -6,10 +7,9 @@
 
 <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
-
   <div class="form-inline">
      <div class="form-group">
-        <div class="fist_name" >
+        <div class="nick_name" >
           <div class="ml-2">
        <%= f.label :ニックネーム %>
           </div>

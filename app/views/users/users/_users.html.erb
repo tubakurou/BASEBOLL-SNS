@@ -1,0 +1,19 @@
+<table class="table table-hover table-inverse">
+      <tr>
+        <tbody>
+          <% users.each do |user| %>
+          <tr>
+           <td>
+             <%= link_to attachment_image_tag(user,:user_image, size:"40x40", format: 'jpg', fallback: "no_image_user.png"),user_path(user) %>
+            </td>
+            <td><%=user.nick_name %></td>
+            <td>ファンチーム：<%= user.team.team_name %></td>
+              <%= render "users/users/follow",user: user %>
+            </td>
+             <td><%= link_to 'Show', user_path(user), class: "user_#{user.id}" %></td>
+              <% end %>
+            </td>
+          </tr>
+         </tbody>
+      </tr>
+  </table>
