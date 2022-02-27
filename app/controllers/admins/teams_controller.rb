@@ -1,5 +1,5 @@
 class Admins::TeamsController < ApplicationController
-  before_action user_admin, only: [:index]
+  before_action :if_not_admins
   def index
     @team = Team.new
     @teams = Team.all
@@ -21,7 +21,7 @@ class Admins::TeamsController < ApplicationController
     @team.update(team_params)
     redirect_to admins_teams_path
   end
-  
+
    def destroy
     @team= Team.find(params[:id])
     @team.destroy
