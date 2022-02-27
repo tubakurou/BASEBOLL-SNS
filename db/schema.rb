@@ -32,12 +32,8 @@ ActiveRecord::Schema.define(version: 2022_02_27_091339) do
   end
 
   create_table "followers", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "followerd_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follower_id"], name: "index_followers_on_follower_id"
-    t.index ["followerd_id"], name: "index_followers_on_followerd_id"
   end
 
   create_table "game_comments", force: :cascade do |t|
