@@ -1,7 +1,5 @@
 class Admins::GamesController < ApplicationController
-   before_action :if_not_admin
- 
-
+   
   def index
     @game = Game.new
     @games = Game.all.page(params[:page])
@@ -69,7 +67,5 @@ private
   def game_params
       params.require(:game).permit(:game_date, :stadium, :game_show, :game_status, :strike, :boll, :out, :game_time, :result_show, :innings)
   end
- def if_not_admin
-    redirect_to root_path unless current_user.admin?
-  end
+ 
 end

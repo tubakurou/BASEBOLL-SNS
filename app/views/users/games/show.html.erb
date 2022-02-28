@@ -277,7 +277,7 @@
          <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
         <% else if after_game_player.player.order_status == "1" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
          <td>1</td>
-         <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.position_status %></td>
          <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
         <% end %>
         <% end %>
