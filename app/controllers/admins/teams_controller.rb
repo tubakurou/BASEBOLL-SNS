@@ -1,5 +1,5 @@
 class Admins::TeamsController < ApplicationController
-  
+
   def index
     @team = Team.new
     @teams = Team.all
@@ -29,9 +29,8 @@ class Admins::TeamsController < ApplicationController
    end
 
 
-private
+  private
   def team_params
-      params.require(:team).permit(:team_name,:team_image)
+       params.require(:team).permit(:team_name,:team_image)
   end
-  
 end
