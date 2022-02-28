@@ -1,4 +1,5 @@
 class Admins::TeamsController < ApplicationController
+  before_action :if_not_admin
   
   def index
     @team = Team.new
@@ -33,5 +34,8 @@ private
   def team_params
       params.require(:team).permit(:team_name,:team_image)
   end
+def if_not_admin
+   redirect_to root_path unless current_user.admin?
+end
   
 end

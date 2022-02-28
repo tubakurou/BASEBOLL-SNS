@@ -23,5 +23,6 @@ class Game < ApplicationRecord
    def already_game_teamed?(team)
     self.game_teams.exists?(team_id: team.id)
    end
+   
 
 end
