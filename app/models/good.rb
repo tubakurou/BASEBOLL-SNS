@@ -1,3 +1,3 @@
 class Good < ApplicationRecord
-  has_many :teams
+   belongs_to :goos
 end
