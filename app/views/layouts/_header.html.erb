@@ -15,9 +15,9 @@
           <li><%= link_to "ユーザー",users_path, class: 'btn btn-outline-dark' %> </li>
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark'%> </li>
           <% elsif admin_signed_in?%>
-          <li><%= link_to '試合編集',new_admins_game_path, class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to '試合編集',admins_games_path, class: 'btn btn-outline-dark'%></li>
           <li><%= link_to 'ユーザー編集',users_path, class: 'btn btn-outline-dark'%></li>
-          <li><%= link_to 'チーム編集',new_admins_team_path, class: 'btn btn-outline-dark'%></li>
+          <li><%= link_to 'チーム編集',admins_teams_path, class: 'btn btn-outline-dark'%></li>
            <li><%= link_to "試合速報",root_path, class: 'btn btn-outline-dark'%> </li>
            <li><%= link_to "試合一覧",games_path, class: 'btn btn-outline-dark'%> </li>
           <li><%= link_to "ユーザー",users_path, class: 'btn btn-outline-dark' %> </li>
