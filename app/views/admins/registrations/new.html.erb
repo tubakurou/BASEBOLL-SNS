@@ -3,27 +3,135 @@
 <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="form-inline">
+     <div class="form-group">
+        <div class="nick_name" >
+          <div class="ml-2">
+       <%= f.label :ニックネーム %>
+          </div>
+        </div>
+      <div class=" d-flex align-items-center justify-content-center" style="height:80px" >
+         <%= f.text_field :nick_name, autofocus: true %>
+        </div>
+      </div>
+    </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <div class="postal-code">
+        <div class="ml-3 ">
+    <%= f.label :プロフィール %>
+        </div>
+          </div>
+        <div class="ml-4 d-flex align-items-center justify-content-center" style="height:40px">
+    <%= f.text_area :profile, autofocus: true, :placeholder =>"0000000" %><br />
+        </div>
+      </div>
+    </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <div class="address">
+        <div class="ml-3 mr-5">
+    <%= f.label :ファンチーム %>
+        </div>
+          </div>
+         　 <div class="ml-5 d-flex align-items-center justify-content-center"style="height:60px">
+    <%= f.collection_select(:team_id, Team.all, :id, :team_name, prompt: "-- 選択してください --", class: "col-sm-9 team_id") %><br />
+           </div>
+          </div>
+       </div>
+   <div class="form-inline">
+     <div class="form-group">
+    　<lavel>名前</lavel>
+        <div class="fist_name" >
+          <div class="ml-5">
+       <%= f.label :（性）%>
+          </div>
+        </div>
+      <div class="ml-2 d-flex align-items-center justify-content-center" style="height:60px" >
+      <%= f.text_field :first_name, autofocus: true, :placeholder =>"令和"%>
+     </div>
+       <div class="last_name">
+         <div class="ml-2">
+       <%= f.label :（名）%>
+         </div>
+       </div>
+         <div class="ml-3" >
+     <%= f.text_field  :last_name, autofocus: true, :placeholder =>"道子" %>
+         </div>
+      </div>
+    </div>
+<div class="form-inline">
+     <div class="form-group">
+    　<lavel> ふりがな </lavel>
 
-  <div class="field">
-    <%= f.label :password %>
+        <div class="fist_name" >
+          <div class="ml-2">
+       <%= f.label :（せい）%>
+          </div>
+        </div>
+      <div class=" d-flex align-items-center justify-content-center" style="height:80px" >
+      <%= f.text_field :first_name_kana, autofocus: true, :placeholder =>"令和"%>
+     </div>
+       <div class="last_name">
+         <div class="ml-2">
+       <%= f.label :（めい）%>
+         </div>
+       </div>
+     <%= f.text_field  :last_name_kana, autofocus: true, :placeholder =>"道子" %>
+         </div>
+      </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <div class="postal-code">
+        <div class="ml-4 ">
+    <%= f.label :メールアドレス %>
+        </div>
+          </div>
+        <div class="ml-5 d-flex align-items-center justify-content-center" style="height:60px">
+    <%= f.email_field :email, autofocus: true, :placeholder =>"0000000" %><br />
+        </div>
+      </div>
+    </div>
+
+ <div class="form-inline">
+    <div class="form-group">
+     <div class="password">
+       <div class="ml-2">
+       <%= f.label :パスワード（６文字以上）%>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+    <% end %>
+       </div>
+     </div>
+  <div class="ml-4 d-flex align-items-center justify-content-center" style="height:80px">
     <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+        </div>
+      </div>
+   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
+   <div class="form-inline">
+     <div class="form-group">
+       <div class="password">
+         <div class="ml-2 mr-2 d-flex align-items-center">
+    <%= f.label :パスワード（確認用） %><br />
+         </div>
+       </div>
+         <div class="ml-5 d-flex align-items-center justify-content-center">
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+         </div>
+       </div>
+    </div>
+  <p>
+    <div class="align-items-center" style="height:50px">
+     <div class="actns">
+    <%= f.submit "新規登録",class: "btn btn-success btn- col-3 mx-auto font-weight-bold d-flex align-items-center justify-content-center" %>
+     </div>
+    </div>
+  </p>
+   </div>
+  <h5>
+  <div class="font-weight-bold">
+    既にお済みの方
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+</h5>
+<%= link_to "こちら", user_session_path %>からログイン
 <% end %>
-
-<%= render "admins/shared/links" %>

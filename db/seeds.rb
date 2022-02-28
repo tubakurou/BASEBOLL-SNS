@@ -35,14 +35,5 @@ Team.create!(
   id: 6,
 )
 
- email: "#{n + 1}@a",
-    nick_name: "eaa#{n + 1}",
-    team_id: 2,
-    first_name: "吉田#{n + 1}",
-    first_name_kana:"よしだ#{n + 1}",
-    last_name: "翔吾#{n + 1}",
-    last_name_kana: "しょうご#{n + 1}",
-    password: "aaaaaa",
-    id: "#{n + 1}",
-  )
-end
+  
+ 

@@ -32,8 +32,9 @@
           <tbody>
             <% @games.each do |game| %>
               <tr>
+              <%= link_to "試合詳細",admins_game_path(game) %>
                 <td><%= game.game_date %><%= game.game_time.strftime("%H:%M") %>　<%= game.stadium %></td>
-                <td><%= link_to "編集する", edit_admins_team_path(game.id), class: "btn btn-primary" %></td>
+           
                 <td><%= link_to "削除する", "/admins/games/#{game.id}", method: :delete, class: "btn btn-primary" %></td>
               </tr>
             <% end %>

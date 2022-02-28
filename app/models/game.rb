@@ -1,6 +1,4 @@
 class Game < ApplicationRecord
-   attachment :player_image
-
    has_many  :game_teams
    has_many  :teams, through: :game_teams
    has_many  :game_players
