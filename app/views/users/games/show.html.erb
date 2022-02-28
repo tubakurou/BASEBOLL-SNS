@@ -528,8 +528,8 @@
             <th class="border border-dark">成績</th>
           </tr>
         <tr>
-          <td class="border border-dark"><%= attachment_image_tag after_player, :player_image, format: 'jpeg', size: "60x60" %></td>
-          <td class="border border-dark"><%= after_player.first_name %><%= after_player.player.last_name %></td>
+          <td class="border border-dark"><%= attachment_image_tag after_game_player.player, :player_image, format: 'jpeg', size: "60x60" %></td>
+          <td class="border border-dark"><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
           <td class="border border-dark"><%= after_game_player.bat_results %></td>
         </tr>
       </div>
