@@ -1,10 +1,10 @@
 class Admins::GamePlayersController < ApplicationController
-
   def create
     @player = Player.find(params[:player_id])
     @game = Game.find(params[:game_id])
-    @game_player = @player.game_players.create(game_id: params[:game_id])
-    redirect_to edit_admins_team_player_path(params[:team_id],params[:player_id])
+    @game_player = GamePlayer.new(game_players_params)
+    @game_player.save(game_players_params)
+     redirect_to request.referer
   end
 
   def update
@@ -13,13 +13,23 @@ class Admins::GamePlayersController < ApplicationController
     if @game_player.update(game_player_params)
       redirect_to admins_game_path(@game)
     else
-      render action: :show
+       redirect_to request.referer
     end
+  end
+
+  def destroy
+    @game_player = GamePlayer.find(params[:id])
+     @game_player.destroy
+    redirect_to request.referer
   end
 
  private
   def game_player_params
-    params.require(:game_player).permit(:boll_count, :point_lost, :bat_results, :order_status, :position_status)
+     params.require(:game_player).permit(:inning, :boll_count, :point_lost, :bat_results, :order_status, :position_status, :game_id, :player_id)
+  end
+
+  def game_players_params
+     params.permit(:inning, :boll_count, :point_lost, :bat_results, :order_status, :position_status, :game_id, :player_id)
   end
 end
 

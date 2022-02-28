@@ -17,6 +17,10 @@ class Users::GameCommentsController < ApplicationController
     render :game_comments
    end
 
+  def search
+  @game_comments = GameComment.search(params[:word])
+  @word = params[:word]
+  end
 
   private
   def game_comment_params

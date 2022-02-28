@@ -5,6 +5,7 @@
       <%= form_with model:@player, url: admins_team_players_path, method: :post, class: "form-horizontal", local: true do |f| %>
         <div class="col-xs-4 col-xs-offset-1">
           <div class="img_field">
+            <%= f.label "選手イメージ）" %>
             <%= attachment_image_tag @player, :player_image, :fill, 100, 100, format: 'jpeg' %>
           </div>
             <%= f.file_field :player_image, id: "user_img" %>

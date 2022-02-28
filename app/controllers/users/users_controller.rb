@@ -2,9 +2,11 @@ class Users::UsersController < ApplicationController
 
 def show
   @user = User.find(params[:id])
-  @game_comments = @user.game_comments.includes
+  @game_comments = @user.game_comments.order(created_at: :desc).page(params[:page]).per(20)
+  @game_comments.each do |game_comment|
+    @game = game_comment.game
+  end
 end
-
 def index
   @users = User.all
 end
@@ -28,9 +30,22 @@ def update
    end
 end
 
+def quit
+    @user = User.find(params[:id])
+end
+
+def out
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+end
+
+
 private
   def user_params
-    params.require(:user).permit(:team_id, :last_name, :first_name, :last_name_kana, :first_name_kana, :profile, :user_image_id, :is_deleted)
+    params.require(:user).permit(:nick_name, :team_id, :last_name, :first_name, :last_name_kana, :first_name_kana, :profile, :user_image_id, :is_deleted)
   end
-end  
-  
+end
+

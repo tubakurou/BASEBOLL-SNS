@@ -1,5 +1,6 @@
 <div class='container px-5 px-sm-0'>
-  <h2>出場選手一覧</h2>
+   <%= @game.game_date %> <%= @game.game_time.strftime("%H:%M") %> <%= @game.stadium %>
+  <h2><%= @team.team_name %>成績一覧</h2>
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
       <table>
@@ -12,32 +13,43 @@
             <th>スタメン</th>
             <th>守備</th>
           </tr>
-        </thead>
-        <tbody>
-  				<% @game_players.each do |player| %>
-    				<tr>
-    				  <td class="info col-xs-1">
-    				    <%= player.player.first_name %>
-    				  </td>
-    				  <td class="info col-xs-1">
-    				    <%= player.boll_count %>
-    				  </td>
-              <td class="info col-xs-1">
-                <%= player.point_lost %>
-              </td>
-                <td class="info col-xs-1">
-    				    <%= player.bat_results %>
-    				  </td>
-              <td class="info col-xs-1">
-                <%= player.order_status %>
-              </td>
-              <td class="info col-xs-1">
-                <%= player.position_status %>
-              </td>
-          <% end %>
-            </tr>
-          </tbody>
-      </table>
+          </thead>
+               <tbody>
+          				<% @game_players.each do |player| %>
+            				  <%= form_with model:player, url: admins_team_player_game_player_path(player,player.player_id, player.player.team_id), class: "form-horizontal", method: :patch, local: true do |f| %>
+                  				<tr>
+                    				  <td class="info col-xs-1">
+                    				    <%= player.player.first_name %>
+                    				  </td>
+                    				  <td class="info col-xs-1">
+                    				    <%= player.boll_count %>
+                    				    <%= f.number_field:boll_count %>
+                    				  </td>
+                              <td class="info col-xs-1">
+                                <%= player.point_lost %>
+                                <%= f.number_field:point_lost %>
+                              </td>
+                                <td class="info col-xs-1">
+                    				    <%= player.bat_results %>
+                    				    <%= f.text_field:bat_results %>
+                    				  </td>
+                              <td class="info col-xs-1">
+                                <%= player.order_status %>
+                                <%= f.number_field:order_status %>
+                              </td>
+                              <td class="info col-xs-1">
+                                <%= player.position_status %>
+                                <%= f.select :position_status,Player.position_statuses.keys %>
+                                <%= f.submit "変更を保存" %>
+                                 <%= link_to "記録削除", admins_team_player_game_player_path(@game,player.player,player),method: :delete %>
+                              </td>
+                            </tr>
+                      <% end %>
+                  <% end %>
+                </thead>
+            </tbody>
+          </table>
+      </div>
     </div>
-  </div>
 </div>
+

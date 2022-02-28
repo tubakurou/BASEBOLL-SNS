@@ -1,14 +1,619 @@
-<div>
-<h3>S<%= @game.strike %></h3> 
 
-<h3>B <%= @game.boll %></h3>
+<table border="1">
+    <tr>
+        <th>チーム</th>
+        <% @ahead_results.each do |ahead_result| %>
+          <% next if ahead_result.inning == 0 %>
+          <th>　<%= ahead_result.inning %>　</th>
+      <% end %>
+        <th>計</th>
+        <th>H</th>
+        <th>E</th>
+    </tr>
+  <tr>
+      <td><%= @ahead_team.team_name %></td>
+      <% @ahead_results.each do |ahead_result| %>
+        <% next if ahead_result.inning == 0 %>
+      <td>　<%= ahead_result.score %>　</td>
+      <% end %>
+      <td>　<%= @ahead_score %>　</td>
+      <td>　<%= @ahead_hit %>　</td>
+      <td>　<%= @ahead_error %>　</td>
+  </tr>
+  <tr>
+     <td><%= @after_team.team_name %></td>
+      <% @after_results.each do |after_result| %>
+          <% next if after_result.inning == 0 %>
+          <td><%= after_result.score %></td>
+      <% end %>
+      <td><%= @after_score %></td>
+      <td><%= @after_hit %></td>
+      <td><%= @after_error %></td>
+  </tr>
 
-<h3>O <%= @game.out %></h3> 
-</div>
-<div id="comments_area">
-  <%= render 'users/game_comments/game_comments', game: @game, game_comments: @game_comments %>
-</div>
+<table border="1">
+    <tr>
+      <th><%= @ahead_team.team_name %></th>
+      <th>守備</th>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "1" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>1</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "1" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>1</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+   <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "2" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>2</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "2" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>2</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "3" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>3</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "3" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>3</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "4" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>4</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "4" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止"&& ahead_game_player.inning == "0" %>
+         <td>4</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "5" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>5</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "5" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>5</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "6" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>6</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "6" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>6</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+   <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "7" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>7</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "7" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>7</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "8" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>8</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "8" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>8</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "9" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>9</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "9" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>9</td>
+         <td><%= ahead_game_player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+        <% if ahead_game_player.player.order_status == "10" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
+        <td>10</td>
+        <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% else if ahead_game_player.order_status == "10" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+         <td>10</td>
+         <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+</table>
+<table>
+<% @ahead_game_players.each do |ahead_game_player| %>
+  <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "2B" && ahead_game_player.position_status == "SS" && ahead_game_player.position_status == "3B" && ahead_game_player.position_status == "1B" %>
+  <tr>
+   <th>内野手</th>
+  </tr>
+  <tr>
+    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  </tr>
+  <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "2B" && ahead_game_player.position_status == "SS" && ahead_game_player.position_status == "3B" && ahead_game_player.position_status == "1B" %>
+  <tr>
+   <th>内野手</th>
+  </tr>
+  <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  <% end %>
+  <% end %>
+<% end %>
 
- <div class="new-game_comment">
-  <%= render 'users/game_comments/form', game: @game, game_comment: @game_comment %>
+<% @ahead_game_players.each do |ahead_game_player| %>
+  <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "CF" && ahead_game_player.position_status == "LF" && ahead_game_player.position_status == "RF" %>
+  <tr>
+   <th>外野手</th>
+  </tr>
+  <tr>
+    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  </tr>
+  <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "CF" && ahead_game_player.position_status == "LF" && ahead_game_player.position_status == "RF" %>
+  <tr>
+   <th>外野手</th>
+  </tr>
+  <tr>
+    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  </tr>
+  <% end %>
+  <% end %>
+<% end %>
+
+<% @ahead_game_players.each do |ahead_game_player| %>
+  <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "C" %>
+  <tr>
+   <th>捕手</th>
+  </tr>
+  <tr>
+    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  </tr>
+  <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "C"  %>
+  <tr>
+   <th>捕手</th>
+  </tr>
+  <tr>
+    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  </tr>
+  <% end %>
+  <% end %>
+<% end %>
+
+<% @ahead_game_players.each do |ahead_game_player| %>
+  <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "P" %>
+  <tr>
+   <th>投手</th>
+  </tr>
+  <tr>
+    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  </tr>
+  <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "P"  %>
+  <tr>
+   <th>投手</th>
+  </tr>
+  <tr>
+    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+  </tr>
+  <% end %>
+  <% end %>
+<% end %>
+</table>
+
+  <% @after_game_players.each do |after_game_player| %>
+      <div class="pull-right">
+        <table border="1" align="right">
+          <tr>
+            <th><%= @after_team.team_name %></th>
+            <th>守備</th>
+          </tr>
+          <tr>
+         <tr>
+        <% if after_game_player.player.order_status == "1" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>1</td>
+        <td><%= after_game_player.player.position_status  %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.player.order_status == "1" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
+         <td>1</td>
+         <td><%= ahead_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "2" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>2</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "2" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>2</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "3" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>3</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "3" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>3</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "4" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>4</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "4" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>4</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "5" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>5</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "5" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>5</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+   <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "6" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>6</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "6" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止"&& after_error_game_player.inning == "0" %>
+         <td>6</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "7" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>7</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "7" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>7</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "8" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>8</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "8" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>8</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "9" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>9</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "9" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>9</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+    <tr>
+      <% @after_game_players.each do |after_game_player| %>
+        <% if after_game_player.player.order_status == "10" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
+        <td>10</td>
+        <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% else if after_game_player.order_status == "10" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+         <td>10</td>
+         <td><%= after_game_player.player.position_status %></td>
+         <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+  </table>
+
+<table>
+  <% @after_game_players.each do |after_game_player| %>
+      <% if after_game_player.order_status == "0" && @game.game_status == "試合中" && after_game_player.player.play_status == true && after_game_player.position_status == "2B" && after_game_player.position_status == "SS" && after_game_player.position_status == "3B" && after_game_player.position_status == "1B" %>
+      <tr>
+        <th>内野手</th>
+      </tr>
+      <tr>
+        <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      </tr>
+        <%else if after_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" && after_game_player.position_status == "2B" && after_game_player.position_status == "SS" && after_game_player.position_status == "3B" && after_game_player.position_status == "1B" %>
+      <tr>
+       <th>内野手</th>
+      </tr>
+      <tr>
+        <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      </tr>
+      <% end %>
+      <% end %>
+  <% end %>
+  <table>
+  <% @after_game_players.each do |after_game_player| %>
+      <% if after_game_player.order_status == "0" && @game.game_status == "試合中" && after_game_player.player.play_status == true && after_game_player.position_status == "CF" && after_game_player.position_status == "LF" && after_game_player.position_status == "RF"%>
+      <tr>
+        <th>外野手</th>
+      </tr>
+      <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      <%else if after_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" &&after_game_player.position_status == "CF" && after_game_player.position_status == "LF" && after_game_player.position_status == "RF" %>
+      <tr>
+        <th>外野手</th>
+      </tr>
+      <tr>
+        <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      </tr>
+      <% end %>
+      <% end %>
+  <% end %>
+
+  <% @after_game_players.each do |after_game_player| %>
+      <% if after_game_player.order_status == "0" && @game.game_status == "試合中" && after_game_player.player.play_status == true && after_game_player.position_status == "C" %>
+      <tr>
+        <th>補手</th>
+      </tr>
+      <tr>
+        <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      </tr>
+      <%else if after_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" &&after_game_player.position_status == "C"  %>
+      <tr>
+        <th>補手</th>
+      </tr>
+      <tr>
+        <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      </tr>
+      <% end %>
+      <% end %>
+  <% end %>
+
+ <% @after_game_players.each do |after_game_player| %>
+      <% if after_game_player.order_status == "0" && @game.game_status == "試合中" && after_game_player.player.play_status == true && after_game_player.position_status == "P" %>
+      <th>投手</th>
+      <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      <%else if after_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" &&after_game_player.position_status == "P"  %>
+      <th>投手</th>
+      <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+      <% end %>
+      <% end %>
+  <% end %>
+</table>
+  <% @ahead_game_players.each do |ahead_game_player| %>
+    <% if ahead_game_player.player.is_pitch == true && ahead_game_player.player.play_status == true %>
+        <table border="1 border border-dark" align="center" class="table-light  border border-dark">
+         <div class="ml-5 mb-5 mt-5">
+          <tr>
+            <th>投手</th>
+            <th></th>
+            <th class="border border-dark">球数</th>
+            <th class="border border-dark">失点</th>
+          </tr>
+          <tr>
+            <td class="border border-dark"><%= attachment_image_tag ahead_game_player.player, :player_image, format: 'jpeg', size: "60x60" %></td>
+            <td class="border border-dark"><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+            <td class="border border-dark"><%= @ahead_boll_count %></td>
+            <td class="border border-dark"><%= @ahead_point_lost %></td>
+          </tr>
+         </div>
+        </table>
+    <% end %>
+  <% end %>
+  <div class="signup-wrapper">
+  <% @after_game_players.each do |after_game_player| %>
+  <div class="ml-5">
+        <tr>
+    <% if after_game_player.player.is_pitch == true && after_game_player.player.play_status == true %>
+    <table border="1" align="center" class="table-light border border-dark">
+            <th>投手</th>
+            <th></th>
+            <th class="border border-dark">球数</th>
+            <th class="border border-dark">失点</th>
+        </tr>
+        <tr>
+            <td class="border border-dark"><%= attachment_image_tag after_game_player.player, :player_image, format: 'jpeg', size: "60x60" %></td>
+            <td class="border border-dark"><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
+            <td class="border border-dark"><%= @after_boll_count %></td>
+            <td class="border border-dark"><%= @after_point_lost %></td>
+        </tr>
+    </table>
+ </div>
+  <% end %>
+<% end %>
+<% @after_game_players.each do |after_game_player| %>
+      <% if after_game_player.player.is_batting == true && after_game_player.player.play_status == true  %>
+        <table border="1" align="center" class="table-light  border border-dark ">
+          <tr>
+            <th>打者</th>
+            <th></th>
+            <th class="border border-dark">成績</th>
+          </tr>
+        <tr>
+          <td class="border border-dark"><%= attachment_image_tag after_player, :player_image, format: 'jpeg', size: "60x60" %></td>
+          <td class="border border-dark"><%= after_player.first_name %><%= after_player.player.last_name %></td>
+          <td class="border border-dark"><%= after_game_player.bat_results %></td>
+        </tr>
+      </div>
+      <% end %>
+<% end %>
+</table>
+<% @ahead_game_players.each do |ahead_game_player| %>
+    <% if ahead_game_player.player.is_batting == true &&  ahead_game_player.player.play_status == true %>
+        <table border="1" align="center" class="table-light border border-dark ">
+          <tr>
+            <th>打者</th>
+            <th></th>
+            <th class="border border-dark">成績</th>
+          </tr>
+          <tr>
+            <td class="border border-dark"><%= attachment_image_tag ahead_game_player.player, :player_image, format: 'jpeg', size: "60x60" %></td>
+            <td class="border border-dark"><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+            <td class="border border-dark"><%= ahead_game_player.bat_results %></td>
+          </tr>
+        </div>
+        </table>
+    <% end %>
+  <% end %>
+</table>
+    <% @game_players.each do |game_player| %>
+        <% if game_player.player.run_status == "1" &&  game_player.player.play_status == true %>
+            <table border="1"  class="table-light border border-dark ">
+              <tr>
+                <th>一塁走者</th>
+                <th class="border border-dark"></th>
+              </tr>
+              <tr>
+                <td class="border border-dark"><%= attachment_image_tag game_player.player, :player_image, format: 'jpeg', size: "60x60" %></td>
+                <td class="border border-dark"><%= game_player.player.first_name %><%= game_player.player.last_name %><</td>
+              </tr>
+        <% end %>
+    <% end %>
+</table>
+</table>
+    <% @game_players.each do |game_player| %>
+        <% if game_player.player.run_status == "2" &&  game_player.player.play_status == true %>
+            <table border="2"  class="table-light border border-dark ">
+              <tr>
+                <th>二塁走者</th>
+                <th class="border border-dark"></th>
+              </tr>
+              <tr>
+                <td class="border border-dark"><%= attachment_image_tag game_player.player, :player_image, format: 'jpeg', size: "60x60" %></td>
+                <td class="border border-dark"><%= game_player.player.first_name %><%= game_player.player.last_name %><</td>
+              </tr>
+        <% end %>
+    <% end %>
+</table>
+</table>
+    <% @game_players.each do |game_player| %>
+        <% if game_player.player.run_status == "3" &&  game_player.player.play_status == true %>
+            <table border="1"  class="table-light border border-dark ">
+              <tr>
+                <th>三塁走者</th>
+                <th class="border border-dark"></th>
+              </tr>
+              <tr>
+                <td class="border border-dark"><%= attachment_image_tag game_player.player, :player_image, format: 'jpeg', size: "60x60" %></td>
+                <td class="border border-dark"><%= game_player.player.first_name %><%= game_player.player.last_name %><</td>
+              </tr>
+        <% end %>
+    <% end %>
+</table>
+<div class="w-25">
+    <p class="text-success h3">
+      B<%= @game.boll %>
+    </p>
+    <p class="text-warning h3">
+     S<%= @game.strike %>
+    </p>
+    <p class="text-danger h3">
+      O<%= @game.out %>
+    <p>
+    <div id="comments_area">
+      <%= render 'users/game_comments/game_comments', game: @game, game_comments: @game_comments %>
+    </div>
+      <div class="new-game_comment">
+        <%= render 'users/game_comments/form', game: @game, game_comment: @game_comment %>
+      </div>
+      <%= link_to "試合コメント一覧へ", game_game_comment_favorites_path(@gam) %>
 </div>
+</div>
+ <% @game_teams.each do |team| %>
+ <%=  team.team.team_name %>
+  <%= link_to "選手成績一覧へ", game_play_players_path(@game,team_id: team.team ) %>
+        </td>
+        <td>
+          <%= link_to "チーム試合成績一覧へ", game_team_results_path(@game,team_id: team.team) %>
+        </td>
+  <% end %>
+<%= paginate @game_comments %>

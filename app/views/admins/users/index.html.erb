@@ -1,0 +1,22 @@
+<table class="table table-hover table-inverse">
+      <tr>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+           <td>
+             <%= link_to attachment_image_tag(user,:user_image, size:"40x40", format: 'jpeg', fallback: "no_image_user.png"),user_path(user) %>
+            </td>
+            <td><%=user.first_name %><%=user.last_name %></td>
+            <td>ファンチーム：<%= user.team.team_name %></td>
+           <% if customer.is_deleted == true %>
+          <td class="form-inline text-muted">
+            退会
+         </td>
+          <% else %>
+          <td class="form-inline text-success">
+            有効
+          </td>
+          <% end %>
+      </tbody>
+     </tr>
+</table>

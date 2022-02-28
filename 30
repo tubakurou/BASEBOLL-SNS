@@ -1,0 +1,5 @@
+== 20220226080039 AddIsPitchToPlayers: reverting ==============================
+-- remove_column(:players, :is_pitch, :boolean, {:default=>0, :null=>false})
+   -> 0.0192s
+== 20220226080039 AddIsPitchToPlayers: reverted (0.0204s) =====================
+

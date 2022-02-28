@@ -1,152 +1,143 @@
-
-      <table>
-        <thead>
-          <tr class="info">
-            <th>チーム</th>
-          </tr>
-        </thead>
-        <tbody>
-  		   <% @teams.each do |team| %>
-    		<tr>
-    		  <td class="info col-xs-1">
-    			<%= team.team_name %>
-                <% if @game.already_game_teamed?(team) %>
-                <%= button_to "チームを外す",  admins_team_game_team_path(team.id,@game.id), method: :delete %>
-                <% else %>
-                <%= button_to "チームを加える", "/admins/teams/#{team.id}/game_teams?id=#{@game.id}", method: :post %>
-                <% end %>
+<div class="container">
+  <% @game_players.each do |game_player| %>
+      <%= form_with model: game_player,url:admins_team_player_game_player_path(game_player.player.team.id, game_player.player.id, game_id: @game.id,id: game_player.id),method: :patch, local:true do |f|%>
+          <% if game_player.player.is_batting == true && game_player.player.play_status == true %>
+          <div class="form-group">
+              <%= game_player.player.first_name %><%= game_player.player.last_name %>
+              打席結果：<%= f.text_field :bat_results %>
+           </div>
+          <%else if game_player.player.is_pitch == true && game_player.player.play_status == true %>
+            <div class="form-group">
+              <%= game_player.player.first_name %><%= game_player.player.last_name %>
+              球数：<%= f.number_field :boll_count %>
+              失点：<%= f.number_field :point_lost %>
+            </div>
+              <%= f.submit "変更を保存" %>
           <% end %>
-          </td>
-           <td class="info col-xs-1">
-            <% @game_team_teams.each do |team| %>
-              <%= team.team_name %>
-            </td>
-            <td class="info col-xs-1">
-              <%= form_with model: @game_team_results, url: admins_team_team_results_path(team_id: team.id,game_id: @game.id), local: true do |f| %>
-               チームイニング<%= f.number_field :inning, class: "col-sm-9 form-control-static name" %>
-                <%= f.submit "チーム成績作成", class: "btn btn-primary pull-right" %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to "出場選手登録へ", admins_game_game_players_path(@game,team_id: team.id ) %>
-           </td>
-            <td>
-              <%= link_to "選手成績一覧へ", admins_game_play_players_path(@game,team_id: team.id ) %>
-           </td>
-           <td>
-              <%= link_to "チーム試合成績一覧へ", admins_game_team_results_path(@game,team_id: team.id) %>
-           </td>
           <% end %>
+      <% end %>
+  <% end %>
+<% @game_team_teams.each do |team| %>
+    <%= form_with model: @game_team_results, url: admins_team_team_results_path(team_id: team.id,game_id: @game.id), local: true do |f| %>
+        <%= team.team_name %>
+        チームイニング<%= f.number_field :inning, class: "info col-xs-1 ml-2 d-flex align-items-center justify-content-center", style: "width:40px" %>
+        <%= f.submit "チーム成績作成", class: "btn btn-primary pull-right" %>
+    <% end %>
+        </td>
+        <td>
+          <%= link_to "出場選手登録へ", admins_game_game_players_path(@game,team_id: team.id ) %>
+        </td>
+        <% if team.players.joins(:game_players).where(game_players: { game_id: @game.id }).any? %>
+        <td>
+          <%= link_to "選手成績一覧へ", admins_game_play_players_path(@game,team_id: team.id ) %>
+        </td>
+        <% end %>
+        <td>
+          <%= link_to "チーム試合成績一覧へ", admins_game_team_results_path(@game,team_id: team.id) %>
+        </td>
+        <td>
+<% end %>
+        </tr>
+    </tbody>
+</tadle>
+<table align="right">
+    <tbody>
+        <% @game_teams.each do |game_team| %>
           <td>
-             <% @game_teams.each do |game_team| %>
-                <%= form_with model:game_team, url:admins_team_game_team_path(game_team.team_id),method: :patch, local:true do |f|%>
-
-			       <% if game_team.is_afters == true %>
-					 後攻：
-				   <% elsif game_team.is_afters == false %>
-					 先攻：
-				   <% end %>
-                  <%= f.radio_button :is_afters, true %>
-                  <%= f.label :is_afters, "後攻", value: true %>
-
-                  <%= f.radio_button :is_afters, false %>
-                  <%= f.label :is_afters, "先攻", value: false %>
-
-            <% if game_team.is_attacks == true %>
-					 攻撃中
-				   <% elsif game_team.is_attacks == false %>
-					 守備中
-				   <% end %>
-                  <%= f.radio_button :is_attacks, true %>
-                  <%= f.label :is_attacks, "攻撃", value: true %>
-
-                  <%= f.radio_button :is_attacks, false %>
-                  <%= f.label :is_attacks, "守備", value: false %>
-
-
-                <%= f.submit "先攻後攻を変更", class: "btn btn-primary pull-right" %></td>
-                <% end %>
+            <% if game_team.is_afters == true %>
+                後攻：<%= game_team.team.team_name %>
+             <% elsif game_team.is_afters == false %>
+                先攻：<%= game_team.team.team_name %>
             <% end %>
-           </td>
-          <%= form_with model:@game, url: {controller: 'games', action: 'update'}, class: "form-horizontal", method: :patch, local: true do |f| %>
-
-             <td class="form-group">
-               <%= @game.game_show %>
-              </td>
-            <td class="form-group">
-              試合イニング<%= f.number_field :innings, class: "col-sm-9 form-control-static name" %>
-            </td></tr>
-            <td class="form-group">
-              経過<%= f.text_field :game_show, class: "col-sm-9 form-control-static name" %>
+            <%= form_with model:game_team, url:admins_team_game_team_path(game_team.team_id),method: :patch, local:true do |f|%>
+                <%= f.radio_button :is_afters, true %>
+                <%= f.label :is_afters, "後攻", value: true %>
+                <%= f.radio_button :is_afters, false %>
+                <%= f.label :is_afters, "先攻", value: false %>
             </td>
-             <td>
-               S <%= f.select :strike,Game.strikes.keys %>
-            </td>
-            <td>
-               B <%= f.select :boll,Game.bolls.keys %>
-            </td>
-            <td>
-               O <%= f.select :out,Game.outs.keys %>
-            </td>
-            <td>
-                <%= f.select :game_status,Game.game_statuses.keys %>
-            </td>
-            <td class="form-group">
-                <%= f.submit "試合内容を変更", class: "btn btn-primary pull-right" %>
-          <% end %>
-            </td>
+                <td>
+                   <% if game_team.is_attacks == true %>
+                    攻撃中：
+                    <% elsif game_team.is_attacks == false %>
+                    守備中
+                    <% end %>
+                    <%= f.radio_button :is_attacks, true %>
+                    <%= f.label :is_attacks, "攻撃", value: true %>
+                    <%= f.radio_button :is_attacks, false %>
+                    <%= f.label :is_attacks, "守備", value: false %>
+                     <%= f.submit "変更", class: "btn btn-primary pull-right" %>
+                </td>
+            <% end %>
+        <% end %>
          </tr>
-      </tbody>
-   </table>
-
-<% @game_players.each do |player| %>
-  <%= form_with model:player, url: admins_team_player_game_player_path(player_id: player.player.id,team_id: player.player.team.id), class: "form-horizontal", method: :patch, local: true do |f| %>
-    <td><% if player.player.play_status == true && player.player.is_batting == true && @game.innings == player.inning %>
-        <%= player.player.first_name %><%= player.player.last_name %>：打席結果 <%= f.text_field :bat_results %>
-        <% end %>
-    </td>
-    <td><% if player.player.play_status == true && player.position_status == "P" && @game.innings == player.inning %>
-       <%= player.player.first_name %><%= player.player.last_name %>：球数 <%= f.number_field :boll_count %>
-        失点 <%= f.number_field :point_lost %>
-        <% end %>
-    <td>
-       <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
-   </td>
-  <% end %>
-  </td>
-<% end %>
-
-<% @game_team_results.each do |team_results| %>
-<% @game_teams.each do |game_team| %>
-  <%= form_with model:team_results, url: admins_team_team_result_path(game_team.team_id, team_results.id), class: "form-horizontal", method: :patch, local: true do |f| %>
-    <td><% if game_team.is_attacks == true && @game.innings == team_results.inning %>
-          <%= team_results.inning %>
-        得点<%= f.number_field :score %>安打<%= f.number_field :hit %>
-        <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
-        <% end %>
-    </td>
-     <td><% if game_team.is_attacks == false && @game.innings == team_results.inning %>
-        エラー<%= f.number_field :error %>
-        <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
-        <% end %>
-    </td>
-  <% end %>
-<% end %>
-<% end %>
-
-
-
-<table border="1">
-  <tr>
-    <th>日本語</th>
-    <th>英語</th>
-  </tr>
-  <tr>
-    <td>東京</td>
-    <td>Tokyo</td>
-  </tr>
-  <tr>
-    <td>大阪</td>
-    <td>Osaka</td>
-  </tr>
+    </tbody>
 </table>
+ <%= form_with model:@game, url: {controller: 'games', action: 'update'}, class: "form-horizontal", method: :patch, local: true do |f| %>
+    <div class="form-group">
+         <%= @game.game_show %>
+    </div>
+    <div class="form-group">
+        試合イニング<%= f.number_field :innings, class: "info col-xs-1 ml-2 d-flex align-items-center justify-content-center", style: "width:40px" %>
+    </div>
+     <div class="form-group">
+          試合経過<%= f.text_field :game_show, class: "col-sm-9 form-control-static name" %>
+     </div>
+      <div class="form-group">
+           S <%= f.select :strike,Game.strikes.keys %>
+      </div>
+      <div class="form-group">
+          B <%= f.select :boll,Game.bolls.keys %>
+      </div>
+      <div class="form-group">
+          O <%= f.select :out,Game.outs.keys %>
+      </td>
+      <div class="form-group">
+            <%= f.select :game_status,Game.game_statuses.keys %>
+      </div>
+      <div class="form-group">
+            <%= f.submit "試合内容を変更", class: "btn btn-primary pull-right" %>
+      </div>
+ <% end %>
+<% @game_team_results.each do |team_results| %>
+    <% @game_teams.each do |game_team| %>
+      <%= form_with model:team_results, url: admins_team_team_result_path(game_team.team_id, team_results.id), class: "form-horizontal", method: :patch, local: true do |f| %>
+        <td>
+          <% if game_team.is_attacks == true && @game.innings == team_results.inning %>
+              <%= game_team.team.team_name %>
+              <%= team_results.inning %>
+            得点<%= f.number_field :score %>安打<%= f.number_field :hit %>
+            <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
+            <% end %>
+        </td>
+         <td>
+           <% if game_team.is_attacks == false && @game.innings == team_results.inning %>
+             <%= game_team.team.team_name %>
+            エラー<%= f.number_field :error %>
+            <%= f.submit "変更を保存", class: "btn btn-primary pull-right" %>
+            <% end %>
+        </td>
+      <% end %>
+    <% end %>
+<% end %>
+<table>
+    <thead>
+        <tr class="info">
+          <th>チーム</th>
+          </tr>
+     </thead>
+     <tbody>
+  		<% @teams.each do |team| %>
+        	<tr>
+        	  <td class="info col-xs-1">
+        	      <%= team.team_name %>
+                  <% if @game.already_game_teamed?(team) %>
+                     <%= button_to "チームを外す",  admins_team_game_team_path(team.id,@game.id), method: :delete %>
+                  <% else %>
+                     <%= button_to "チームを加える", "/admins/teams/#{team.id}/game_teams?id=#{@game.id}", method: :post %>
+                  <% end %>
+               </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+</div>

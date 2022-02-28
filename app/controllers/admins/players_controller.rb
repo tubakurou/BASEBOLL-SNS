@@ -44,6 +44,10 @@ class Admins::PlayersController < ApplicationController
 
 private
   def  player_params
-    params.require(:player).permit(:player_image, :team_id, :last_name, :first_name, :last_name_kana, :first_name_kana, :number, :dominant_pitch, :dominant_bat, :play_status, :order_status, :position_status, :run_status, :is_batting)
+    params.require(:player).permit(:player_image, :team_id, :last_name, :first_name, :last_name_kana, :first_name_kana, :number, :dominant_pitch, :dominant_bat, :play_status, :order_status, :position_status, :run_status, :is_batting, :is_pitch)
   end
+
+ def if_not_admin
+    redirect_to root_path unless current_.admin?
+ end
 end

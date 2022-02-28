@@ -1,5 +1,6 @@
 <div class='container px-5 px-sm-0'>
-  <h2>チーム成績手一覧</h2>
+  <%= @game.game_date %> <%= @game.game_time.strftime("%H:%M") %> <%= @game.stadium %>
+  <h2><%= @team.team_name %>成績一覧</h2>
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
       <table>
@@ -13,22 +14,30 @@
         </thead>
         <tbody>
   				<% @team_results.each do |team_results| %>
-    				<tr>
-    				  <td class="info col-xs-1">
-    				    <%= team_results.inning %>
-    				  </td>
-    				  <td class="info col-xs-1">
-    				    <%= team_results.hit %>
-    				  </td>
-              <td class="info col-xs-1">
-                <%= team_results.score %>
-              </td>
-                <td class="info col-xs-1">
-    				    <%= team_results.error %>
-    				  </td>
+      				<%= form_with model:team_results, url: admins_team_team_result_path(team_results.team_id, team_results.id), class: "form-horizontal", method: :patch, local: true do |f| %>
+        				<tr>
+        				  <td class="info col-xs-1">
+        				    <%= team_results.inning %>
+        				    <%= f.number_field:inning %>
+        				  </td>
+        				  <td class="info col-xs-1">
+        				    <%= team_results.hit %>
+        				     <%= f.number_field:hit %>
+        				  </td>
+                  <td class="info col-xs-1">
+                    <%= team_results.score %>
+                     <%= f.number_field:score %>
+                  </td>
+                    <td class="info col-xs-1">
+        				    <%= team_results.error %>
+        				     <%= f.number_field:error %>
+        				  </td>
+        				  <%= f.submit "変更を保存" %>
+        				  <%= link_to "記録削除", admins_team_team_result_path(team_results.team_id,team_results),method: :delete %>
+        				</tr>
+              <% end %>
           <% end %>
-            </tr>
-          </tbody>
+         </tbody>
       </table>
     </div>
   </div>
