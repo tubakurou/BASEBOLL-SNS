@@ -58,8 +58,7 @@ class Admins::GamesController < ApplicationController
 
   def destroy
     @game = Game.find(params[:id])
-    @game.destroy
-    redirect_to admins_team_path
+    @game.destroyadmins_games_path
   end
 
 
