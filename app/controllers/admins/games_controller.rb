@@ -1,5 +1,5 @@
 class Admins::GamesController < ApplicationController
-   
+
   def index
     @game = Game.new
     @games = Game.all.page(params[:page])
@@ -58,7 +58,7 @@ class Admins::GamesController < ApplicationController
 
   def destroy
     @game = Game.find(params[:id])
-    @game.destroyadmins_games_path
+    @game.destroy
   end
 
 
@@ -66,5 +66,5 @@ private
   def game_params
       params.require(:game).permit(:game_date, :stadium, :game_show, :game_status, :strike, :boll, :out, :game_time, :result_show, :innings)
   end
- 
+
 end
