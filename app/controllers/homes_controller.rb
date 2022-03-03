@@ -11,12 +11,11 @@ class HomesController < ApplicationController
       unless after_team.nil?
         after_score = after_team.team_results.where(game_id: game).sum(:score)
       end
-    unless ahead_team.nil? && after_team.nil?
+   
       @results[game.id]={
-        ahead_team_name:ahead_team.team_name, ahead_team:ahead_team,
-        after_team_name:after_team.team_name, after_team:after_team, ahead_score:ahead_score, after_score:after_score
+        ahead_team_name:ahead_team&.team_name, ahead_team:ahead_team,
+        after_team_name:after_team&.team_name, after_team:after_team, ahead_score:ahead_score, after_score:after_score
        }#トップ画面に必要なデータを先攻、後攻ごとに@results[game.id]に格納
-    end
     end
   end
 end
