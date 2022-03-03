@@ -20,7 +20,7 @@
           <li><%= link_to 'チーム編集',admins_teams_path, class: 'btn btn-outline-dark'%></li>
            <li><%= link_to "試合速報",root_path, class: 'btn btn-outline-dark'%> </li>
            <li><%= link_to "試合一覧",games_path, class: 'btn btn-outline-dark'%> </li>
-          <li><%= link_to "ユーザー",users_path, class: 'btn btn-outline-dark' %> </li>
+          <li><%= link_to "ユーザー",admins_users_path, class: 'btn btn-outline-dark' %> </li>
           <li><%= link_to 'ログアウト',destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark'%></li>
           <% else %>
            <li><%= link_to "試合速報",root_path, class: 'btn btn-outline-dark'%> </li>

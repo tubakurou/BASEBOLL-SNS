@@ -1,14 +1,16 @@
 <h1>本日の試合</h1>
+ <% if @results = {} %>
 <% @games.each do |game| %>
 <div class="container">
   <div class="row">
     <%= link_to game_path(game), class: "btn-link" do %>
+    
       <% if game.game_status == "試合前" %>
-        <%= attachment_image_tag @results[game.id][:ahead_team], :team_image, format: 'jpg', size: "100x100" %>
         <h4>
-        <%= @results[game.id][:ahead_team_name] %>　VS
-        <%= attachment_image_tag @results[game.id][:after_team], :team_image, format: 'jpg', size: "100x100" %>
-        <%= @results[game.id][:after_team_name] %>
+        <%= attachment_image_tag @results[game.id]&[:ahead_team], :team_image, format: 'jpg', size: "100x100" %>
+        <%= @results[game.id]&[:ahead_team_name] %>　VS
+        <%= attachment_image_tag @results[game.id]&[:after_team], :team_image, format: 'jpg', size: "100x100" %>
+        <%= @results[game.id]&[:after_team_name] %>
         </h4>
         <p><%= game.stadium %></p>
         <p><%= game.game_time.strftime("%H:%M") %>開始予定</p>
@@ -41,6 +43,7 @@
       <% end %>
       <% end %>
       <% end %>
+   <% end %>
 <% end %>
 
 

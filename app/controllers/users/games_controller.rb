@@ -22,28 +22,28 @@ class Users::GamesController < ApplicationController
     @game_teams = @game.game_teams
     @game_comments = @game.game_comments.includes(:user).order(created_at: :desc).page(params[:page]).per(5)
     @game_comment = GameComment.new
-    @ahead_team = @game.game_teams.find_by(is_afters: false).team
-    @after_team = @game.game_teams.find_by(is_afters: true).team
-    @ahead_players =  @ahead_team.players
-    @ahead_players.each do |ahead_player|
-    @ahead_game_players = ahead_player.game_players.where(game_id: @game.id)
+    @ahead_team = @game.game_teams.find_by(is_afters: false)&.team
+    @after_team = @game.game_teams.find_by(is_afters: true)&.team
+    @ahead_players =  @ahead_team&.players
+    @ahead_players&.each do |ahead_player|
+      @ahead_game_players = ahead_player.game_players.where(game_id: @game.id)
     end
-    @ahead_results = TeamResult.where(game_id: @game.id,team_id: @ahead_team.id).order(:inning)
-    @ahead_score = @ahead_results.sum(:score)
-    @ahead_hit = @ahead_results.sum(:hit)
-    @ahead_error = @ahead_results.sum(:error)
-    @after_players =  @after_team.players
-    @after_players.each do |after_player|
+    @ahead_results = TeamResult&.where(game_id: @game.id,team_id: @ahead_team&.id).order(:inning)
+    @ahead_score = @ahead_results&.sum(:score)
+    @ahead_hit = @ahead_results&.sum(:hit)
+    @ahead_error = @ahead_results&.sum(:error)
+    @after_players =  @after_team&.players
+    @after_players&.each do |after_player|
       @after_game_players = after_player.game_players.where(game_id: @game.id)
     end
-    @after_results = TeamResult.where(game_id: @game.id,team_id: @after_team.id).order(:inning)
-    @after_score = @after_results.sum(:score)
-    @after_hit = @after_results.sum(:hit)
-    @after_error = @after_results.sum(:error)
-    @after_boll_count = @after_game_players.sum(:boll_count)
-    @after_point_lost = @after_game_players.sum(:point_lost)
-    @ahead_boll_count = @ahead_game_players.sum(:boll_count)
-    @ahead_point_lost = @ahead_game_players.sum(:point_lost)
+    @after_results = TeamResult.where(game_id: @game.id,team_id: @after_team&.id).order(:inning)
+    @after_score = @after_results&.sum(:score)
+    @after_hit = @after_results&.sum(:hit)
+    @after_error = @after_results&.sum(:error)
+    @after_boll_count = @after_game_players&.sum(:boll_count)
+    @after_point_lost = @after_game_players&.sum(:point_lost)
+    @ahead_boll_count = @ahead_game_players&.sum(:boll_count)
+    @ahead_point_lost = @ahead_game_players&.sum(:point_lost)
   end
 
   def game_players
