@@ -1,12 +1,15 @@
-</table>
-    <table border="1" align="center" class="table-light border border-dark ">
-        <tr>
-        <th>詳細</th>
-         <tr>
-        <td class="border border-dark"><%= @game.game_show %></td>
-        </tr>
+<div class= "signup-wrapper">
+ <table border="1" align="center" class="table-light border border-dark ">
+   <tr>
+    <th>詳細</th>
+     <tr>
+    <td class="border border-dark"><%= @game.game_show %></td>
+    </tr>
 
+<% @after_game_players.each do |ahead_game_player| %>
 
+<%= ahead_game_player.player.first_name %>
+<% end %>
 </table>
 <table border="1">
     <tr>
@@ -41,13 +44,13 @@
   </tr>
 
 <table border="1">
-    <tr>
-      <th><%= @ahead_team&.team_name %></th>
-      <th>守備</th>
-    </tr>
-    <tr>
-      <% unless @ahead_game_players.nil? %>
-          <% @ahead_game_players.each do |ahead_game_player| %>
+   <% unless @ahead_game_players.nil? %>
+      <% @ahead_game_players.each do |ahead_game_player| %>
+          <tr>
+            <th><%= @ahead_team&.team_name %></th>
+            <th>守備</th>
+          </tr>
+          <tr>
             <% if ahead_game_player.player.order_status == "1" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
             <td>1</td>
             <td><%= ahead_game_player.player.position_status %></td>
@@ -66,7 +69,7 @@
             <td>2</td>
             <td><%= ahead_game_player.player.position_status %></td>
              <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
-            <% else if ahead_game_player.order_status == "2" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
+            <% else if ahead_game_player.order_status == "2" && @game.game_status == "試合終了" || @game.game_status == "試合d前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
              <td>2</td>
              <td><%= ahead_game_player.position_status %></td>
              <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
@@ -175,11 +178,11 @@
         <tr>
           <% @ahead_game_players.each do |ahead_game_player| %>
             <% if ahead_game_player.player.order_status == "10" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true %>
-            <td>10</td>
+            <td>P</td>
             <td><%= ahead_game_player.player.position_status %></td>
              <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
             <% else if ahead_game_player.order_status == "10" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" %>
-             <td>10</td>
+             <td>P</td>
              <td><%= ahead_game_player.player.position_status %></td>
              <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
             <% end %>
@@ -204,7 +207,7 @@
       <% end %>
       <% end %>
     <% end %>
-    
+
     <% @ahead_game_players.each do |ahead_game_player| %>
       <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "CF" && ahead_game_player.position_status == "LF" && ahead_game_player.position_status == "RF" %>
       <tr>
@@ -223,7 +226,7 @@
       <% end %>
       <% end %>
     <% end %>
-    
+
     <% @ahead_game_players.each do |ahead_game_player| %>
       <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "C" %>
       <tr>
@@ -242,7 +245,7 @@
       <% end %>
       <% end %>
     <% end %>
-    
+
     <% @ahead_game_players.each do |ahead_game_player| %>
       <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "P" %>
       <tr>
@@ -263,7 +266,7 @@
     <% end %>
 <% end %>
 </table>
- <% unless @after_game_player.nil? %>
+ <% unless @after_game_players.nil? %>
       <% @after_game_players.each do |after_game_player| %>
           <div class="pull-right">
             <table border="1" align="right">
@@ -277,7 +280,7 @@
             <td>1</td>
             <td><%= after_game_player.player.position_status  %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.player.order_status == "1" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "1" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == 0 %>
              <td>1</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -291,7 +294,7 @@
             <td>2</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "2" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "2" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
              <td>2</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -305,7 +308,7 @@
             <td>3</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "3" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "3" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
              <td>3</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -319,7 +322,7 @@
             <td>4</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "4" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "4" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
              <td>4</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -333,7 +336,7 @@
             <td>5</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "5" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "5" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
              <td>5</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -347,7 +350,7 @@
             <td>6</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "6" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止"&& after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "6" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止"&& after_game_player.inning == "0" %>
              <td>6</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -361,7 +364,7 @@
             <td>7</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "7" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "7" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
              <td>7</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -375,7 +378,7 @@
             <td>8</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "8" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "8" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
              <td>8</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -389,7 +392,7 @@
             <td>9</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "9" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
+            <% else if after_game_player.order_status == "9" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
              <td>9</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
@@ -400,11 +403,11 @@
         <tr>
           <% @after_game_players.each do |after_game_player| %>
             <% if after_game_player.player.order_status == "10" && @game.game_status == "試合中" && after_game_player.player.play_status == true %>
-            <td>10</td>
+            <td>P</td>
             <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
-            <% else if after_game_player.order_status == "10" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_error_game_player.inning == "0" %>
-             <td>10</td>
+            <% else if after_game_player.order_status == "10" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && after_game_player.inning == "0" %>
+             <td>P</td>
              <td><%= after_game_player.player.position_status %></td>
              <td><%= after_game_player.player.first_name %><%= after_game_player.player.last_name %></td>
             <% end %>
@@ -412,7 +415,7 @@
           <% end %>
         </tr>
       </table>
-    
+
     <table>
       <% @after_game_players.each do |after_game_player| %>
           <% if after_game_player.order_status == "0" && @game.game_status == "試合中" && after_game_player.player.play_status == true && after_game_player.position_status == "2B" && after_game_player.position_status == "SS" && after_game_player.position_status == "3B" && after_game_player.position_status == "1B" %>
@@ -449,7 +452,7 @@
           <% end %>
           <% end %>
       <% end %>
-    
+
       <% @after_game_players.each do |after_game_player| %>
           <% if after_game_player.order_status == "0" && @game.game_status == "試合中" && after_game_player.player.play_status == true && after_game_player.position_status == "C" %>
           <tr>
@@ -468,7 +471,7 @@
           <% end %>
           <% end %>
       <% end %>
-    
+
      <% @after_game_players.each do |after_game_player| %>
           <% if after_game_player.order_status == "0" && @game.game_status == "試合中" && after_game_player.player.play_status == true && after_game_player.position_status == "P" %>
           <th>投手</th>
@@ -634,3 +637,4 @@
         </td>
   <% end %>
 <%= paginate @game_comments %>
+</div>

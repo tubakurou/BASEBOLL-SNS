@@ -21,10 +21,7 @@ class Admins::GamesController < ApplicationController
   def game_players
     @game = Game.find(params[:game_id])
     @team = Team.find(params[:team_id])
-    @team_players = @team.players
-    @team_players.each do |team_player|
-      @game_players = team_player.game_players.where(game_id: @game.id,player_id: @team.players).order(created_at: :desc).page(params[:page]).per(20)
-    end
+    @game_players = @game.game_players.where(player_id: @team.players).order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def team_results
