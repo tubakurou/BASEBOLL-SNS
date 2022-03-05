@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable,:rememberable,:validatable
+  attachment :user_image
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
@@ -20,7 +21,6 @@ end
 def following?(user)
   followings.include?(user)
 end
-  attachment :user_image
 def active_for_authentication?
     super && (is_deleted == false)
 end
