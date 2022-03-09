@@ -51,4 +51,3 @@ get "/about" => 'homes#about'
       resources :team_results
     end
   end
-end
