@@ -16,7 +16,7 @@
           </thead>
                <tbody>
           				<% @game_players.each do |player| %>
-            				  <%= form_with model:player, url: admins_team_player_game_player_path(player,player.player_id, player.player.team_id), class: "form-horizontal", method: :patch, local: true do |f| %>
+            				  <%= form_with model:player, url: admins_team_player_game_player_path(player.player_id, player.player.team_id,player.id,), class: "form-horizontal", method: :patch, local: true do |f| %>
                   				<tr>
                     				  <td class="info col-xs-1">
                     				    <%= player.player.first_name %>

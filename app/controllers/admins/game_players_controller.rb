@@ -8,13 +8,9 @@ class Admins::GamePlayersController < ApplicationController
   end
 
   def update
-    @game = Game.find(params[:id])
     @game_player = GamePlayer.find(params[:id])
-    if @game_player.update(game_player_params)
-      redirect_to admins_game_path(@game)
-    else
-       redirect_to request.referer
-    end
+    @game_player.update(game_player_params)
+    redirect_to request.referer
   end
 
   def destroy

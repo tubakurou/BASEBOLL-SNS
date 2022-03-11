@@ -1,5 +1,5 @@
 class Admins::GamesController < ApplicationController
- before_action :if_not_admins
+
   def index
     @game = Game.new
     @games = Game.all.page(params[:page])
@@ -21,10 +21,7 @@ class Admins::GamesController < ApplicationController
   def game_players
     @game = Game.find(params[:game_id])
     @team = Team.find(params[:team_id])
-    @team_players = @team.players
-    @team_players.each do |team_player|
-      @game_players = team_player.game_players.where(game_id: @game.id,player_id: @team.players).order(created_at: :desc).page(params[:page]).per(20)
-    end
+    @game_players = @game.game_players.where(player_id: @team.players).order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def team_results
@@ -59,7 +56,6 @@ class Admins::GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
-    redirect_to admins_team_path
   end
 
 
@@ -67,7 +63,5 @@ private
   def game_params
       params.require(:game).permit(:game_date, :stadium, :game_show, :game_status, :strike, :boll, :out, :game_time, :result_show, :innings)
   end
- def if_not_admins
-    redirect_to root_path unless current_user.admin?
- end
+
 end

@@ -28,14 +28,14 @@ get "/about" => 'homes#about'
         resource :favorites, only: [:create, :destroy]
       end
     end
-    resources :teams do
+    resources :teams, only: [:create, :destroy,:index,:show] do
     resources :players
     end
   end
 
   namespace :admins do
     resources :users
-    resources :games do
+    resources :games, only: [:create, :destroy, :index, :show] 
       get ":team_id/game_players" => "games#game_players", as: "play_players"
       get ":team_id/team_results" => "games#team_results", as: "team_results"
        get ":team_id/players" => "games#players", as: "game_players"
@@ -51,4 +51,3 @@ get "/about" => 'homes#about'
       resources :team_results
     end
   end
-end

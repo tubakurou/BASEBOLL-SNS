@@ -48,6 +48,6 @@ private
   end
 
  def if_not_admin
-    redirect_to root_path unless current_.admin?
+    redirect_to root_path unless current_user.admin?
  end
 end
