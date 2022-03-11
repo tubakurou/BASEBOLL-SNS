@@ -23,6 +23,7 @@ class Users::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @game = Game.all
     @game_players = @game.game_players
     @game_teams = @game.game_teams
     @game_comments = @game.game_comments.includes(:user).order(created_at: :desc).page(params[:page]).per(5)
