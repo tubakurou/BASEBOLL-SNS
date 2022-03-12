@@ -192,37 +192,37 @@
     <table>
     <% @ahead_game_players.each do |ahead_game_player| %>
       <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "2B" && ahead_game_player.position_status == "SS" && ahead_game_player.position_status == "3B" && ahead_game_player.position_status == "1B" %>
-      <tr>
-       <th>内野手</th>
-      </tr>
-      <tr>
-        <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
-      </tr>
+          <tr>
+              <th>内野手</th>
+          </tr>
+          <tr>
+        　    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+          </tr>
       <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "2B" && ahead_game_player.position_status == "SS" && ahead_game_player.position_status == "3B" && ahead_game_player.position_status == "1B" %>
-      <tr>
-       <th>内野手</th>
-      </tr>
-      <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+          <tr>
+              <th>内野手</th>
+          </tr>
+          <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
       <% end %>
       <% end %>
     <% end %>
 
     <% @ahead_game_players.each do |ahead_game_player| %>
       <% if ahead_game_player.order_status == "0" && @game.game_status == "試合中" && ahead_game_player.player.play_status == true && ahead_game_player.position_status == "CF" && ahead_game_player.position_status == "LF" && ahead_game_player.position_status == "RF" %>
-      <tr>
-       <th>外野手</th>
-      </tr>
-      <tr>
-        <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
-      </tr>
-      <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "CF" && ahead_game_player.position_status == "LF" && ahead_game_player.position_status == "RF" %>
-      <tr>
-       <th>外野手</th>
-      </tr>
-      <tr>
-        <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
-      </tr>
-      <% end %>
+          <tr>
+              <th>外野手</th>
+          </tr>
+          <tr>
+        　    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+          </tr>
+          <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "CF" && ahead_game_player.position_status == "LF" && ahead_game_player.position_status == "RF" %>
+              <tr>
+                  <th>外野手</th>
+              </tr>
+              <tr>
+            　    <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
+              </tr>
+          <% end %>
       <% end %>
     <% end %>
 
