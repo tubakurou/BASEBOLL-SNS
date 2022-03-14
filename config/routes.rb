@@ -28,7 +28,7 @@ get "/about" => 'homes#about'
         resource :favorites, only: [:create, :destroy]
       end
     end
-    resources :teams do
+    resources :teams, only: [:create, :destroy,:index,:show] do
     resources :players
     end
   end
@@ -44,9 +44,9 @@ get "/about" => 'homes#about'
       end
     end
     resources :teams do
-      resources :players do
+      resources :players, only: [:index, :edit, :create, :update, :destroy, :new] do
         resources :game_players
-        end
+      end
       resources :game_teams
       resources :team_results
     end
