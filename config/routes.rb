@@ -28,7 +28,7 @@ get "/about" => 'homes#about'
         resource :favorites, only: [:create, :destroy]
       end
     end
-    resources :teams, only: [:create, :destroy,:index,:show] do
+    resources :teams, only: [:index,:show] do
     resources :players
     end
   end
