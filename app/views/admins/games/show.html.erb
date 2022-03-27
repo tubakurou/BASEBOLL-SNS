@@ -4,7 +4,7 @@
           <% if game_player.player.is_batting == true && game_player.player.play_status == true %>
           <div class="form-group">
               <%= game_player.player.first_name %><%= game_player.player.last_name %>
-              結果：<%= f.text_field :bat_results %>
+              打席結果：<%= f.text_field :bat_results %>
            </div>
           <%else if game_player.player.is_pitch == true && game_player.player.play_status == true %>
             <div class="form-group">
