@@ -45,10 +45,10 @@ get "/about" => 'homes#about'
     end
     resources :teams do
       resources :players, only: [:index, :edit, :create, :update, :destroy, :new] do
-        resources :game_players, only: [:create, :destroy,:index]
+        resources :game_players, only: [:create, :destroy,:index, :update]
       end
-      resources :game_teams
-      resources :team_results
+      resources :game_teams, only: [:create, :destroy, :update]
+      resources :team_results, only: [:create, :destroy,:index, :update]
     end
   end
 end
