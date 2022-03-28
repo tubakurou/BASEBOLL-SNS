@@ -82,3 +82,4 @@ end
 #gem 'foreigner'
 gem 'enum_help'
 gem 'pry-rails'
+gem "haml-rails", "~> 2.0"
