@@ -29,7 +29,7 @@ get "/about" => 'homes#about'
       end
     end
     resources :teams, only: [:index,:show] do
-    resources :players
+    resources :players, only: [:index,:show]
     end
   end
 
