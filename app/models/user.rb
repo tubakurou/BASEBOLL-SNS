@@ -12,17 +12,17 @@ class User < ApplicationRecord
   belongs_to :team
   has_many :favorites, dependent: :destroy
 
-def follow(user_id)
-  relationships.create(followed_id: user_id)
-end
-def unfollow(user_id)
-  relationships.find_by(followed_id: user_id).destroy
-end
-def following?(user)
-  followings.include?(user)
-end
-def active_for_authentication?
-    super && (is_deleted == false)
-end
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  def following?(user)
+    followings.include?(user)
+  end
+  def active_for_authentication?
+      super && (is_deleted == false)
+  end
 end
 
