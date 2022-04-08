@@ -23,7 +23,6 @@
         チームイニング<%= f.number_field :inning, class: "info col-xs-1 ml-2 d-flex align-items-center justify-content-center", style: "width:40px" %>
         <%= f.submit "チーム成績作成", class: "btn btn-primary pull-right" %>
     <% end %>
-        </td>
         <td>
           <%= link_to "出場選手登録へ", admins_game_game_players_path(@game,team_id: team.id ) %>
         </td>
