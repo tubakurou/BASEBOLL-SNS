@@ -63,7 +63,7 @@ class Users::GamesController < ApplicationController
   def team_results
     @team = Team.find(params[:team_id])
     @game = Game.find(params[:game_id])
-    @team_results =  @team.team_results.where(game_id: @game.id,team_id: @team.id).order(created_at: :desc).all.page(params[:page]).per(20)
+    @team_results = @team.team_results.where(game_id: @game.id,team_id: @team.id).order(created_at: :desc).all.page(params[:page]).per(20)
   end
 
   def game_comments
