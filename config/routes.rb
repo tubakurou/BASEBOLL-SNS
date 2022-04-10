@@ -34,7 +34,7 @@ get "/about" => 'homes#about'
   end
 
   namespace :admins do
-    resources :users
+    resources :userss, only: [:index,:show  :update, :destroy,]
     resources :games, only: [:index,:show]  do
       get ":team_id/game_players" => "games#game_players", as: "play_players"
       get ":team_id/team_results" => "games#team_results", as: "team_results"
