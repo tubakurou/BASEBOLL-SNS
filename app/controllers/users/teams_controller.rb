@@ -5,6 +5,6 @@ class Users::TeamsController < ApplicationController
   
   def show
     @team = Team.params[team]
-    @prayers = Team.players
+    @players = Team.players
   end
 end
