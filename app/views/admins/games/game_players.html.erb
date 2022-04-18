@@ -41,7 +41,7 @@
                                 <%= player.position_status %>
                                 <%= f.select :position_status,Player.position_statuses.keys %>
                                 <%= f.submit "変更を保存" %>
-                                 <%= link_to "記録削除", admins_team_player_game_player_path(@game,player.player,player),method: :delete %>
+                                <%= link_to "記録削除", admins_team_player_game_player_path(@game,player.player,player),method: :delete %>
                               </td>
                             </tr>
                       <% end %>
