@@ -1,5 +1,5 @@
 <div class='container px-5 px-sm-0'>
-   <%= @game.game_date %> <%= @game.game_time.strftime("%H:%M") %> <%= @game.stadium %>
+  <%= @game.game_date %> <%= @game.game_time.strftime("%H:%M") %> <%= @game.stadium %>
   <h2><%= @team.team_name %>成績一覧</h2>
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
@@ -18,7 +18,7 @@
           				<% @game_players.each do |player| %>
             				  <%= form_with model:player, url: admins_team_player_game_player_path(player.player_id, player.player.team_id,player.id,), class: "form-horizontal", method: :patch, local: true do |f| %>
                   				<tr>
-                    				  <td class="info col-xs-1">
+                    			<td class="info col-xs-1">
                     				    <%= player.player.first_name %>
                     				  </td>
                     				  <td class="info col-xs-1">
