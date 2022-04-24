@@ -200,7 +200,7 @@
           </tr>
       <%else if ahead_game_player.order_status == "0" && @game.game_status == "試合終了" || @game.game_status == "試合前" || @game.game_status == "試合中止" && ahead_game_player.inning == "0" && ahead_game_player.position_status == "2B" && ahead_game_player.position_status == "SS" && ahead_game_player.position_status == "3B" && ahead_game_player.position_status == "1B" %>
           <tr>
-              <th>内野手</th>
+          <th>内野手</th>
           </tr>
           <td><%= ahead_game_player.player.first_name %><%= ahead_game_player.player.last_name %></td>
       <% end %>

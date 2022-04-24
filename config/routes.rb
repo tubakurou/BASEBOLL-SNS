@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
 
 devise_for :admins,skip: [:passwords], controllers: {
-  registrations: "admins/registrations",
+registrations: "admins/registrations",
   sessions: 'admins/sessions'
 }
 get "/about" => 'homes#about'
