@@ -17,7 +17,7 @@ class Users::GamesController < ApplicationController
         @results[game.id]={
           ahead_is_attacks:ahead_game&.is_attacks, ahead_team_name:ahead_team&.team_name, ahead_team:ahead_team,
           after_team_name:after_team&.team_name, after_team:after_team, ahead_score:ahead_score, after_score:after_score
-         }#トップ画面に必要なデータを先攻、後攻ごとに@results[game.id]に格納
+         }#トップ画面に必要なデータを先攻,後攻ごとに@results[game.id]に格納
     end
   end
 
