@@ -1,5 +1,5 @@
 <div class="container">
-  <% @game_players.each do |game_player| %>
+    <% @game_players.each do |game_player| %>
       <%= form_with model: game_player,url:admins_team_player_game_player_path(game_player.player.team.id, game_player.player.id, game_id: @game.id,id: game_player.id),method: :patch, local:true do |f|%>
           <% if game_player.player.is_batting == true && game_player.player.play_status == true %>
           <div class="form-group">
@@ -16,7 +16,7 @@
           <% end %>
           <% end %>
       <% end %>
-  <% end %>
+      <% end %>
 <% @game_team_teams.each do |team| %>
     <%= form_with model: @game_team_results, url: admins_team_team_results_path(team_id: team.id,game_id: @game.id), local: true do |f| %>
         <%= team.team_name %>
